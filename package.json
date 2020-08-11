@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --passWithNoTests --silent --noStackTrace --runInBand --no-cache",
-    "test:staged": "npm test -- --findRelatedTests"
+    "test:staged": "npm test -- --findRelatedTests",
+    "check": "npm-check -s -u"
   },
   "keywords": [
     "workspace",
@@ -29,7 +30,7 @@
     "husky": "^4.2.5",
     "jest": "^26.3.0",
     "lint-staged": "^10.2.11",
-    "ts-jest": "^26.1.4",
+    "ts-jest": "^26.2.0",
     "typescript": "^3.9.7"
   }
 }
