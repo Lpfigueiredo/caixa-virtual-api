@@ -4,7 +4,8 @@
   "description": "My TypeScrypt Node Workspace",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest --passWithNoTests --silent --noStackTrace --runInBand --no-cache",
+    "test:staged": "npm test -- --findRelatedTests"
   },
   "keywords": [
     "workspace",
