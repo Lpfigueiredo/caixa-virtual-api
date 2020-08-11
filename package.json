@@ -4,7 +4,7 @@
   "description": "My TypeScrypt Node Workspace",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "keywords": [
     "workspace",
@@ -15,6 +15,7 @@
   "author": "Leonardo Paulo Figueiredo",
   "license": "ISC",
   "devDependencies": {
+    "@types/jest": "^26.0.9",
     "@types/node": "^14.0.27",
     "@typescript-eslint/eslint-plugin": "^3.7.0",
     "eslint": "^7.5.0",
@@ -25,7 +26,9 @@
     "eslint-plugin-standard": "^4.0.1",
     "git-commit-msg-linter": "^2.4.4",
     "husky": "^4.2.5",
+    "jest": "^26.3.0",
     "lint-staged": "^10.2.11",
+    "ts-jest": "^26.1.4",
     "typescript": "^3.9.7"
   }
 }
