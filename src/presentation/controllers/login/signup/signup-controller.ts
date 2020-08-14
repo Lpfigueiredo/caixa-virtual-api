@@ -1,11 +1,11 @@
-import { Controller, HttpRequest, HttpResponse } from '../../../protocols'
-import { AddAccount } from '../../../../domain/usecases/account/add-account'
+import { Controller, HttpRequest, HttpResponse, AddAccount, Authentication } from './signup-controller-protocols'
 import { forbidden } from '../../../helpers/http/http-helper'
 import { EmailInUseError } from '../../../errors'
 
 export class SignUpController implements Controller {
   constructor (
-    private readonly addAccount: AddAccount
+    private readonly addAccount: AddAccount,
+    private readonly authentication: Authentication
   ) {}
 
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
@@ -18,6 +18,7 @@ export class SignUpController implements Controller {
     if (!account) {
       return forbidden(new EmailInUseError())
     }
+    await this.authentication.auth({ email, password })
     return Promise.resolve(null)
   }
 }
