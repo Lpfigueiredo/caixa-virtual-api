@@ -1,5 +1,4 @@
-import { Controller, HttpRequest, HttpResponse } from '../../../protocols'
-import { AddCategory } from '../../../../domain/usecases/category/add-category'
+import { Controller, HttpRequest, HttpResponse, AddCategory } from './add-category-controller-protocols'
 import { serverError, noContent } from '../../../helpers/http/http-helper'
 
 export class AddCategoryController implements Controller {

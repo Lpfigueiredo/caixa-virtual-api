@@ -1,6 +1,5 @@
-import { HttpRequest } from '../../../protocols'
-import { AddCategory, AddCategoryModel } from '../../../../domain/usecases/category/add-category'
 import { AddCategoryController } from './add-category-controller'
+import { AddCategory, AddCategoryModel, HttpRequest } from './add-category-controller-protocols'
 import { serverError, noContent } from '../../../helpers/http/http-helper'
 
 const makeFakeRequest = (): HttpRequest => ({
