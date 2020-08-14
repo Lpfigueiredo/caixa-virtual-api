@@ -1,7 +1,7 @@
 {
   "name": "my-node-ts-workspace",
-  "version": "1.0.0",
-  "description": "My TypeScrypt Node Workspace",
+  "version": "1.1.0",
+  "description": "Aplicação para o processo seletivo da TecnoSpeed",
   "main": "index.js",
   "scripts": {
     "dev": "sucrase-node src/main/server.ts",
