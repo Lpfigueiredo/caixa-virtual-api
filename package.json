@@ -10,6 +10,7 @@
     "test:verbose": "jest --passWithNoTests --runInBand --no-cache",
     "test:unit": "npm test -- --watch -c jest-unit-config.js",
     "test:integration": "npm test -- --watch -c jest-integration-config.js",
+    "test:ci": "npm test -- --coverage",
     "check": "npm-check -s -u"
   },
   "keywords": [
