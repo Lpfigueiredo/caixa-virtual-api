@@ -1,7 +1,7 @@
 import { SignUpController } from './signup-controller'
 import { HttpRequest, AccountModel, AddAccount, AddAccountModel, Authentication, AuthenticationModel } from './signup-controller-protocols'
-import { forbidden, ok } from '../../../helpers/http/http-helper'
-import { EmailInUseError } from '../../../errors'
+import { forbidden, ok, serverError } from '../../../helpers/http/http-helper'
+import { EmailInUseError, ServerError } from '../../../errors'
 
 const makeAddAccount = (): AddAccount => {
   class AddAccountStub implements AddAccount {
@@ -87,5 +87,14 @@ describe('SignUp Controller', () => {
     const { sut } = makeSut()
     const httpResponse = await sut.handle(makeFakeRequest())
     expect(httpResponse).toEqual(ok({ accessToken: 'any_token' }))
+  })
+
+  test('Should return 500 if AddAccount throws', async () => {
+    const { sut, addAccountStub } = makeSut()
+    jest.spyOn(addAccountStub, 'add').mockImplementationOnce(async () => {
+      return new Promise((resolve, reject) => reject(new Error()))
+    })
+    const httpResponse = await sut.handle(makeFakeRequest())
+    expect(httpResponse).toEqual(serverError(new ServerError(null)))
   })
 })
