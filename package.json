@@ -4,6 +4,7 @@
   "description": "My TypeScrypt Node Workspace",
   "main": "index.js",
   "scripts": {
+    "dev": "sucrase-node src/main/server.ts",
     "test": "jest --passWithNoTests --silent --noStackTrace --runInBand --no-cache",
     "test:staged": "npm test -- --findRelatedTests",
     "test:verbose": "jest --passWithNoTests --runInBand --no-cache",
@@ -37,12 +38,14 @@
     "husky": "^4.2.5",
     "jest": "^26.3.0",
     "lint-staged": "^10.2.11",
+    "sucrase": "^3.15.0",
     "supertest": "^4.0.2",
     "ts-jest": "^26.2.0",
     "typescript": "^3.9.7"
   },
   "dependencies": {
     "bcrypt": "^5.0.0",
+    "celebrate": "^12.2.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.6.0"
