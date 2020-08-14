@@ -1,5 +1,5 @@
 import { LoadCategoryModel } from '../../models/load-category'
 
-export interface LoadCategory {
+export interface LoadCategories {
   load (): Promise<LoadCategoryModel[]>
 }
