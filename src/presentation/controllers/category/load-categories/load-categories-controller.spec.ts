@@ -1,6 +1,6 @@
 import { LoadCategoriesController } from './load-categories-controller'
 import { LoadCategoryModel, LoadCategories } from './load-categories-controller-protocols'
-import { ok } from '../../../helpers/http/http-helper'
+import { ok, noContent } from '../../../helpers/http/http-helper'
 
 const makeFakeLoadCategory = (): LoadCategoryModel[] => {
   return [{
@@ -48,5 +48,12 @@ describe('LoadCategories Controller', () => {
     const { sut } = makeSut()
     const httpResponse = await sut.handle({})
     expect(httpResponse).toEqual(ok(makeFakeLoadCategory()))
+  })
+
+  test('Should return 204 if LoadSurveys returns empty', async () => {
+    const { sut , loadCategoriesStub } = makeSut()
+    jest.spyOn(loadCategoriesStub, 'load').mockReturnValueOnce(new Promise((resolve) => resolve([])))
+    const httpResponse = await sut.handle({})
+    expect(httpResponse).toEqual(noContent())
   })
 })
