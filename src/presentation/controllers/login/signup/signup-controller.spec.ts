@@ -1,5 +1,5 @@
 import { SignUpController } from './signup-controller'
-import { AccountModel, AddAccount, AddAccountModel } from './signup-controller-protocols'
+import { AccountModel, AddAccount, AddAccountModel, Authentication, AuthenticationModel } from './signup-controller-protocols'
 import { HttpRequest } from '../../../protocols'
 import { forbidden } from '../../../helpers/http/http-helper'
 import { EmailInUseError } from '../../../errors'
@@ -29,17 +29,29 @@ const makeFakeRequest = (): HttpRequest => ({
   }
 })
 
+const makeAuthentication = (): Authentication => {
+  class AuthenticationStub implements Authentication {
+    async auth (authentication: AuthenticationModel): Promise<string> {
+      return new Promise(resolve => resolve('any_token'))
+    }
+  }
+  return new AuthenticationStub()
+}
+
 interface SutTypes {
   sut: SignUpController
   addAccountStub: AddAccount
+  authenticationStub: Authentication
 }
 
 const makeSut = (): SutTypes => {
   const addAccountStub = makeAddAccount()
-  const sut = new SignUpController(addAccountStub)
+  const authenticationStub = makeAuthentication()
+  const sut = new SignUpController(addAccountStub, authenticationStub)
   return {
     sut,
-    addAccountStub
+    addAccountStub,
+    authenticationStub
   }
 }
 
@@ -60,5 +72,15 @@ describe('SignUp Controller', () => {
     jest.spyOn(addAccountStub, 'add').mockReturnValueOnce(new Promise(resolve => resolve(null)))
     const httpResponse = await sut.handle(makeFakeRequest())
     expect(httpResponse).toEqual(forbidden(new EmailInUseError()))
+  })
+
+  test('Should call Authentication with correct values', async () => {
+    const { sut, authenticationStub } = makeSut()
+    const authSpy = jest.spyOn(authenticationStub, 'auth')
+    await sut.handle(makeFakeRequest())
+    expect(authSpy).toHaveBeenCalledWith({
+      email: 'any_email@mail.com',
+      password: 'any_password'
+    })
   })
 })
