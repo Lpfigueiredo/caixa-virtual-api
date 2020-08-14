@@ -1,7 +1,6 @@
 import { SignUpController } from './signup-controller'
-import { AccountModel, AddAccount, AddAccountModel, Authentication, AuthenticationModel } from './signup-controller-protocols'
-import { HttpRequest } from '../../../protocols'
-import { forbidden } from '../../../helpers/http/http-helper'
+import { HttpRequest, AccountModel, AddAccount, AddAccountModel, Authentication, AuthenticationModel } from './signup-controller-protocols'
+import { forbidden, ok } from '../../../helpers/http/http-helper'
 import { EmailInUseError } from '../../../errors'
 
 const makeAddAccount = (): AddAccount => {
@@ -82,5 +81,11 @@ describe('SignUp Controller', () => {
       email: 'any_email@mail.com',
       password: 'any_password'
     })
+  })
+
+  test('Should return 200 if valid data is provided', async () => {
+    const { sut } = makeSut()
+    const httpResponse = await sut.handle(makeFakeRequest())
+    expect(httpResponse).toEqual(ok({ accessToken: 'any_token' }))
   })
 })
