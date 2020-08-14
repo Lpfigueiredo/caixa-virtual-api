@@ -12,7 +12,8 @@ const makeFakeAccount = (): AccountModel => ({
   id: 'any_id',
   name: 'any_name',
   email: 'any_email@mail.com',
-  password: 'hashed_password'
+  password: 'hashed_password',
+  totalBalance: 0
 })
 
 const makeFakeAuthentication = (): AuthenticationModel => ({
