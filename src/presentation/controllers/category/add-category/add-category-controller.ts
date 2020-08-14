@@ -1,6 +1,6 @@
 import { Controller, HttpRequest, HttpResponse } from '../../../protocols'
 import { AddCategory } from '../../../../domain/usecases/category/add-category'
-import { serverError } from '../../../helpers/http/http-helper'
+import { serverError, noContent } from '../../../helpers/http/http-helper'
 
 export class AddCategoryController implements Controller {
   constructor (private readonly addCategory: AddCategory) {}
@@ -13,7 +13,7 @@ export class AddCategoryController implements Controller {
         accountId,
         name
       })
-      return Promise.resolve(null)
+      return noContent()
     } catch (error) {
       return serverError(error)
     }
