@@ -1,5 +1,5 @@
 import { Controller, HttpRequest, HttpResponse, Authentication } from './login-controller-protocols'
-import { unauthorized, serverError } from '../../../helpers/http/http-helper'
+import { unauthorized, serverError, ok } from '../../../helpers/http/http-helper'
 
 export class LoginController implements Controller {
   constructor (
@@ -16,7 +16,7 @@ export class LoginController implements Controller {
       if (!accessToken) {
         return unauthorized()
       }
-      return null
+      return ok({ accessToken })
     } catch (error) {
       return serverError(error)
     }
