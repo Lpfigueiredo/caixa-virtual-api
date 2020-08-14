@@ -107,4 +107,11 @@ describe('DbAddAccount Usecase', () => {
     const account = await sut.add(makeFakeAccountData())
     expect(account).toBeNull()
   })
+
+  test('Should call LoadAccountByEmailRepository with correct email', async () => {
+    const { sut, loadAccountByEmailRepositoryStub } = makeSut()
+    const loadSpy = jest.spyOn(loadAccountByEmailRepositoryStub, 'loadByEmail')
+    await sut.add(makeFakeAccountData())
+    expect(loadSpy).toHaveBeenCalledWith('valid_email@mail.com')
+  })
 })
