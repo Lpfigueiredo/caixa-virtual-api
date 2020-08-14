@@ -1,7 +1,7 @@
 import { HttpRequest } from '../../../protocols'
 import { AddCategory, AddCategoryModel } from '../../../../domain/usecases/category/add-category'
 import { AddCategoryController } from './add-category-controller'
-import { serverError } from '../../../helpers/http/http-helper'
+import { serverError, noContent } from '../../../helpers/http/http-helper'
 
 const makeFakeRequest = (): HttpRequest => ({
   accountId: 'any_account_id',
@@ -50,5 +50,11 @@ describe('AddCategory Controller', () => {
     jest.spyOn(addCategoryStub, 'add').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
     const httpResponse = await sut.handle(makeFakeRequest())
     expect(httpResponse).toEqual(serverError(new Error()))
+  })
+
+  test('Should return 204 on success', async () => {
+    const { sut } = makeSut()
+    const httpResponse = await sut.handle(makeFakeRequest())
+    expect(httpResponse).toEqual(noContent())
   })
 })
