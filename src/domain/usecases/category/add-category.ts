@@ -1,4 +1,5 @@
 export interface AddCategoryModel {
+  accountId: string
   name: string
 }
 
