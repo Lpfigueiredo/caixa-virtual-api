@@ -4,6 +4,8 @@ import { LoadCategoryModel } from '../../../../domain/models/load-category'
 import { AddMovementController } from './add-movement-controller'
 import { forbidden, serverError } from '../../../helpers/http/http-helper'
 import { InvalidParamError } from '../../../errors/invalid-param-error'
+import { AddMovement, AddMovementModel } from '../../../../domain/usecases/movement/add-movement/add-movement'
+import MockDate from 'mockdate'
 
 const makeFakeRequest = (): HttpRequest => ({
   accountId: 'any_account_id',
@@ -34,21 +36,41 @@ const makeLoadCategoryByAccountId = (): LoadCategoriesByAccountId => {
   return new LoadCategoriesByAccountIdStub()
 }
 
+const makeAddMovement = (): AddMovement => {
+  class AddMovementStub implements AddMovement {
+    async add (data: AddMovementModel): Promise<void> {
+      return new Promise(resolve => resolve())
+    }
+  }
+  return new AddMovementStub()
+}
+
 interface SutTypes {
   sut: AddMovementController
   loadCategoriesByAccountIdStub: LoadCategoriesByAccountId
+  addMovementStub: AddMovement
 }
 
 const makeSut = (): SutTypes => {
   const loadCategoriesByAccountIdStub = makeLoadCategoryByAccountId()
-  const sut = new AddMovementController(loadCategoriesByAccountIdStub)
+  const addMovementStub = makeAddMovement()
+  const sut = new AddMovementController(loadCategoriesByAccountIdStub, addMovementStub)
   return {
     sut,
-    loadCategoriesByAccountIdStub
+    loadCategoriesByAccountIdStub,
+    addMovementStub
   }
 }
 
 describe('AddMovement Controller', () => {
+  beforeAll(() => {
+    MockDate.set(new Date())
+  })
+
+  afterAll(() => {
+    MockDate.reset()
+  })
+
   test('Should call LoadCategoriesByAccountId with correct value', async () => {
     const { sut, loadCategoriesByAccountIdStub } = makeSut()
     const loadByAccountIdSpy = jest.spyOn(loadCategoriesByAccountIdStub, 'loadById')
@@ -81,5 +103,19 @@ describe('AddMovement Controller', () => {
       }
     })
     expect(httpResponse).toEqual(forbidden(new InvalidParamError('categoryId')))
+  })
+
+  test('Should call AddMovement with correct values', async () => {
+    const { sut, addMovementStub } = makeSut()
+    const addMovementSpy = jest.spyOn(addMovementStub, 'add')
+    await sut.handle(makeFakeRequest())
+    expect(addMovementSpy).toHaveBeenCalledWith({
+      accountId: 'any_account_id',
+      categoryId: 'any_id',
+      type: 'entry',
+      value: '123.45',
+      description: 'any_description',
+      date: new Date()
+    })
   })
 })
