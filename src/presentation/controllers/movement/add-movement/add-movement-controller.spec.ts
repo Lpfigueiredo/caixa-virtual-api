@@ -22,8 +22,8 @@ const makeFakeCategoryResult = (): LoadCategoryModel[] => ([
     name: 'any_name'
   },
   {
-    id: 'any_id',
-    name: 'any_name'
+    id: 'other_id',
+    name: 'other_name'
   }
 ])
 
