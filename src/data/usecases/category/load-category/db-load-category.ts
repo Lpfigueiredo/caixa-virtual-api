@@ -6,7 +6,7 @@ export class DbLoadCategory implements LoadCategoriesByAccountId {
   constructor (private readonly loadCategoryRepository: LoadCategoryRepository) {}
 
   async loadById (id: string): Promise<CategoryModel[]> {
-    await this.loadCategoryRepository.loadByAccountId(id)
-    return null
+    const categories = await this.loadCategoryRepository.loadByAccountId(id)
+    return categories
   }
 }
