@@ -9,8 +9,14 @@ export class AddMovementController implements Controller {
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
       const { accountId } = httpRequest
+      const { categoryId } = httpRequest.body
       const categories = await this.loadByAccountId.loadById(accountId)
-      if (!categories.length) {
+      if (categories.length) {
+        const categoriesObj = categories.map(a => a.id)
+        if (!categoriesObj.includes(categoryId)) {
+          return forbidden(new InvalidParamError('categoryId'))
+        }
+      } else {
         return forbidden(new InvalidParamError('categoryId'))
       }
       return null
