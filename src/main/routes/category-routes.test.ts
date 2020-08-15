@@ -43,7 +43,7 @@ describe('Category Routes', () => {
   })
 
   describe('POST /categories', () => {
-    test('Should return 200 on signup success', async () => {
+    test('Should return 204 on success', async () => {
       const accessToken = await makeAccessToken()
       await request(app)
         .post('/api/categories')
@@ -51,6 +51,16 @@ describe('Category Routes', () => {
         .send({
           name: 'Conta de luz'
         })
+        .expect(204)
+    })
+  })
+
+  describe('GET /categories', () => {
+    test('Should return 204 on load empty list', async () => {
+      const accessToken = await makeAccessToken()
+      await request(app)
+        .get('/api/categories')
+        .set('x-access-token', accessToken)
         .expect(204)
     })
   })
