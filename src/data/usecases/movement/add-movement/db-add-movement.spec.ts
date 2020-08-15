@@ -42,4 +42,11 @@ describe('DbAddMovement Usecase', () => {
     await sut.add(movementData)
     expect(addSpy).toHaveBeenCalledWith(movementData)
   })
+
+  test('Should throw if AddMovementRepository throws', async () => {
+    const { sut, addMovementRepositoryStub } = makeSut()
+    jest.spyOn(addMovementRepositoryStub, 'add').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
+    const promise = sut.add(makeFakeMovementData())
+    await expect(promise).rejects.toThrow()
+  })
 })
