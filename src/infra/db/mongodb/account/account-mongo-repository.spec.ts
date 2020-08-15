@@ -98,4 +98,37 @@ describe('Account Mongo Repository', () => {
       expect(account).toBeFalsy()
     })
   })
+
+  describe('updateTotalBalance()', () => {
+    test('Should update the account totalBalance on updateTotalBalance success', async () => {
+      const sut = makeSut()
+      const res = (await accountCollection.insertOne({
+        name: 'any_name',
+        email: 'any_email@mail.com',
+        password: 'any_password',
+        totalBalance: 0
+      })).ops[0]
+      expect(res.totalBalance).toBe(0)
+      await sut.updateTotalBalance(res._id, 12345)
+      const account = await accountCollection.findOne({ _id: res._id })
+      expect(account).toBeTruthy()
+      expect(account.totalBalance).toBe(12345)
+    })
+
+    test('Should update the account totalBalance on updateTotalBalance success', async () => {
+      const sut = makeSut()
+      const res = (await accountCollection.insertOne({
+        name: 'any_name',
+        email: 'any_email@mail.com',
+        password: 'any_password',
+        totalBalance: 0
+      })).ops[0]
+      expect(res.totalBalance).toBe(0)
+      await sut.updateTotalBalance(res._id, -12345)
+      await sut.updateTotalBalance(res._id, -5)
+      const account = await accountCollection.findOne({ _id: res._id })
+      expect(account).toBeTruthy()
+      expect(account.totalBalance).toBe(-12350)
+    })
+  })
 })
