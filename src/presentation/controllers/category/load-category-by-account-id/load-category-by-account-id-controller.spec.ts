@@ -2,6 +2,7 @@ import { HttpRequest } from '../../../protocols'
 import { CategoryModel } from '../../../../domain/models/category'
 import { LoadCategoriesByAccountId } from '../../../../domain/usecases/category/load-categories-by-account-id'
 import { LoadCategoryController } from './load-category-by-account-id-controller'
+import { ok } from '../../../helpers/http/http-helper'
 
 const makeFakeRequest = (): HttpRequest => ({
   accountId: 'any_account_id'
@@ -49,5 +50,11 @@ describe('LoadCategory Controller', () => {
     const loadByIdSpy = jest.spyOn(loadCategoriesByAccountIdStub, 'loadById')
     await sut.handle(makeFakeRequest())
     expect(loadByIdSpy).toHaveBeenCalledWith('any_account_id')
+  })
+
+  test('Should return 200 on success', async () => {
+    const { sut } = makeSut()
+    const httpResponse = await sut.handle(makeFakeRequest())
+    expect(httpResponse).toEqual(ok(makeFakeCategoryResult()))
   })
 })
