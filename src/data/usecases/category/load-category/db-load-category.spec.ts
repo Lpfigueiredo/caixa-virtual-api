@@ -1,6 +1,7 @@
-import { CategoryModel } from '../../../../domain/models/category'
 import { LoadCategoryRepository } from '../../../protocols/db/category/load-category-repository'
 import { DbLoadCategory } from './db-load-category'
+import { LoadCategoryModel } from '../../../../domain/models/load-category'
+import { CategoryModel } from '../../../../domain/models/category'
 
 const makeFakeCategories = (): CategoryModel[] => ([
   {
@@ -11,6 +12,17 @@ const makeFakeCategories = (): CategoryModel[] => ([
   {
     id: 'other_id',
     accountId: 'any_account_id',
+    name: 'other_name'
+  }
+])
+
+const makeFakeLoadCategories = (): LoadCategoryModel[] => ([
+  {
+    id: 'any_id',
+    name: 'any_name'
+  },
+  {
+    id: 'other_id',
     name: 'other_name'
   }
 ])
@@ -49,7 +61,7 @@ describe('DbLoadCategory Usecase', () => {
   test('Should return Categories on success', async () => {
     const { sut } = makeSut()
     const categories = await sut.loadById('any_id')
-    expect(categories).toEqual(makeFakeCategories())
+    expect(categories).toEqual(makeFakeLoadCategories())
   })
 
   test('Should throw if LoadCategoryRepository throws', async () => {

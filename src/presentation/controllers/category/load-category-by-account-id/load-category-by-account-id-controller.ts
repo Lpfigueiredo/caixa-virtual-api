@@ -8,11 +8,7 @@ export class LoadCategoryController implements Controller {
     try {
       const { accountId } = httpRequest
       const categories = await this.loadCategoriesByAccountId.loadById(accountId)
-      let categoriesFormated = []
-      if (categories.length) {
-        categoriesFormated = categories.map(category => ({ id: category.id, name: category.name }))
-      }
-      return categoriesFormated.length ? ok(categoriesFormated) : noContent()
+      return categories.length ? ok(categories) : noContent()
     } catch (error) {
       return serverError(error)
     }

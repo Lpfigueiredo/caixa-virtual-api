@@ -1,12 +1,16 @@
 import { LoadCategoriesByAccountId } from '../../../../domain/usecases/category/load-categories-by-account-id'
-import { CategoryModel } from '../../../../domain/models/category'
 import { LoadCategoryRepository } from '../../../protocols/db/category/load-category-repository'
+import { LoadCategoryModel } from '../../../../domain/models/load-category'
 
 export class DbLoadCategory implements LoadCategoriesByAccountId {
   constructor (private readonly loadCategoryRepository: LoadCategoryRepository) {}
 
-  async loadById (id: string): Promise<CategoryModel[]> {
+  async loadById (id: string): Promise<LoadCategoryModel[]> {
     const categories = await this.loadCategoryRepository.loadByAccountId(id)
-    return categories
+    let categoriesFormated = []
+    if (categories.length) {
+      categoriesFormated = categories.map(category => ({ id: category.id, name: category.name }))
+    }
+    return categoriesFormated
   }
 }
