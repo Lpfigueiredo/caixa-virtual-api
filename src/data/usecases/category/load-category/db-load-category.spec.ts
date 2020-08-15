@@ -45,4 +45,10 @@ describe('DbLoadCategory Usecase', () => {
     await sut.loadById('any_id')
     expect(loadByAccountIdSpy).toHaveBeenCalledWith('any_id')
   })
+
+  test('Should return Categories on success', async () => {
+    const { sut } = makeSut()
+    const categories = await sut.loadById('any_id')
+    expect(categories).toEqual(makeFakeCategories())
+  })
 })
