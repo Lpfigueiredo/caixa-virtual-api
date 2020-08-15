@@ -2,8 +2,9 @@ import { AddAccountRepository } from '../../../../data/protocols/db/account/add-
 import { AddAccountModel } from '../../../../domain/usecases/account/add-account'
 import { AccountModel } from '../../../../domain/models/account'
 import { MongoHelper } from '../helpers/mongo-helper'
+import { UpdateAccessTokenRepository } from '../../../../data/protocols/db/account/update-access-token-repository'
 
-export class AccountMongoRepository implements AddAccountRepository {
+export class AccountMongoRepository implements AddAccountRepository, UpdateAccessTokenRepository {
   async add (accountData: AddAccountModel): Promise<AccountModel> {
     const accountCollection = await MongoHelper.getCollection('accounts')
     const newAccount = Object.assign({}, accountData, { totalBalance: 0 })
