@@ -132,4 +132,11 @@ describe('AddMovement Controller', () => {
       date: new Date()
     })
   })
+
+  test('Should return 500 if AddMovement throws', async () => {
+    const { sut, addMovementStub } = makeSut('entry')
+    jest.spyOn(addMovementStub, 'add').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
+    const httpResponse = await sut.handle(makeFakeRequest())
+    expect(httpResponse).toEqual(serverError(new Error()))
+  })
 })
