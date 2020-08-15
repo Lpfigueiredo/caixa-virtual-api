@@ -113,7 +113,21 @@ describe('AddMovement Controller', () => {
       accountId: 'any_account_id',
       categoryId: 'any_id',
       type: 'entry',
-      value: 123.45,
+      value: 12345,
+      description: 'any_description',
+      date: new Date()
+    })
+  })
+
+  test('Should call AddMovement with correct values', async () => {
+    const { sut, addMovementStub } = makeSut('exit')
+    const addMovementSpy = jest.spyOn(addMovementStub, 'add')
+    await sut.handle(makeFakeRequest())
+    expect(addMovementSpy).toHaveBeenCalledWith({
+      accountId: 'any_account_id',
+      categoryId: 'any_id',
+      type: 'exit',
+      value: -12345,
       description: 'any_description',
       date: new Date()
     })

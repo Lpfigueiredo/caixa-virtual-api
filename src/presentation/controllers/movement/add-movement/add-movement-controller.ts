@@ -14,7 +14,8 @@ export class AddMovementController implements Controller {
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
       const { accountId } = httpRequest
-      const { categoryId, value, description } = httpRequest.body
+      const { categoryId, description } = httpRequest.body
+      let { value } = httpRequest.body
       const categories = await this.loadByAccountId.loadById(accountId)
       if (categories.length) {
         const categoriesObj = categories.map(a => a.id)
@@ -24,11 +25,15 @@ export class AddMovementController implements Controller {
       } else {
         return forbidden(new InvalidParamError('categoryId'))
       }
+      value = Number(value) * 100
+      if (this.type === 'exit') {
+        value = value * -1
+      }
       await this.addMovement.add({
         accountId,
         categoryId,
         type: this.type,
-        value: Number(value),
+        value,
         description,
         date: new Date()
       })
