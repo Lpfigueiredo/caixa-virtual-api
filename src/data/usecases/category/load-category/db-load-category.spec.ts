@@ -51,4 +51,11 @@ describe('DbLoadCategory Usecase', () => {
     const categories = await sut.loadById('any_id')
     expect(categories).toEqual(makeFakeCategories())
   })
+
+  test('Should throw if LoadCategoryRepository throws', async () => {
+    const { sut, loadCategoryRepositoryStub } = makeSut()
+    jest.spyOn(loadCategoryRepositoryStub, 'loadByAccountId').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
+    const promise = sut.loadById('any_id')
+    await expect(promise).rejects.toThrow()
+  })
 })
