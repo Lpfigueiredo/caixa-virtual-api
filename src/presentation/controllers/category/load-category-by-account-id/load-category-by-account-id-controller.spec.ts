@@ -2,7 +2,7 @@ import { HttpRequest } from '../../../protocols'
 import { CategoryModel } from '../../../../domain/models/category'
 import { LoadCategoriesByAccountId } from '../../../../domain/usecases/category/load-categories-by-account-id'
 import { LoadCategoryController } from './load-category-by-account-id-controller'
-import { ok, noContent } from '../../../helpers/http/http-helper'
+import { ok, noContent, serverError } from '../../../helpers/http/http-helper'
 
 const makeFakeRequest = (): HttpRequest => ({
   accountId: 'any_account_id'
@@ -63,5 +63,12 @@ describe('LoadCategory Controller', () => {
     jest.spyOn(loadCategoriesByAccountIdStub, 'loadById').mockReturnValueOnce(new Promise((resolve) => resolve([])))
     const httpResponse = await sut.handle(makeFakeRequest())
     expect(httpResponse).toEqual(noContent())
+  })
+
+  test('Should return 500 if LoadCategoriesByAccountId throws', async () => {
+    const { sut, loadCategoriesByAccountIdStub } = makeSut()
+    jest.spyOn(loadCategoriesByAccountIdStub, 'loadById').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
+    const httpResponse = await sut.handle(makeFakeRequest())
+    expect(httpResponse).toEqual(serverError(new Error()))
   })
 })
