@@ -70,4 +70,11 @@ describe('DbAddMovement Usecase', () => {
     await sut.add(movementData)
     expect(updateTotalBalanceSpy).toHaveBeenCalledWith('any_account_id', 12345)
   })
+
+  test('Should throw if UpdateAccountRepository throws', async () => {
+    const { sut, updateAccountRepositoryStub } = makeSut()
+    jest.spyOn(updateAccountRepositoryStub, 'updateTotalBalance').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
+    const promise = sut.add(makeFakeMovementData())
+    await expect(promise).rejects.toThrow()
+  })
 })
