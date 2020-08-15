@@ -8,7 +8,7 @@ import { InvalidParamError } from '../../../errors/invalid-param-error'
 const makeFakeRequest = (): HttpRequest => ({
   accountId: 'any_account_id',
   body: {
-    categoryId: 'any_category_id',
+    categoryId: 'any_id',
     value: '123.45',
     description: 'any_description'
   }
@@ -68,5 +68,18 @@ describe('AddMovement Controller', () => {
     jest.spyOn(loadCategoriesByAccountIdStub, 'loadById').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
     const httpResponse = await sut.handle(makeFakeRequest())
     expect(httpResponse).toEqual(serverError(new Error()))
+  })
+
+  test('Should return 403 if an invalid categoryId is provided', async () => {
+    const { sut } = makeSut()
+    const httpResponse = await sut.handle({
+      accountId: 'any_account_id',
+      body: {
+        categoryId: 'wrong_id',
+        value: '123.45',
+        description: 'any_description'
+      }
+    })
+    expect(httpResponse).toEqual(forbidden(new InvalidParamError('categoryId')))
   })
 })
