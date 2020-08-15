@@ -27,7 +27,7 @@ export class AddMovementController implements Controller {
         accountId,
         categoryId,
         type: 'entry',
-        value,
+        value: Number(value),
         description,
         date: new Date()
       })

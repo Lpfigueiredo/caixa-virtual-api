@@ -113,7 +113,7 @@ describe('AddMovement Controller', () => {
       accountId: 'any_account_id',
       categoryId: 'any_id',
       type: 'entry',
-      value: '123.45',
+      value: 123.45,
       description: 'any_description',
       date: new Date()
     })
