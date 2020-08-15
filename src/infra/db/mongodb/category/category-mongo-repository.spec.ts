@@ -3,6 +3,7 @@ import { MongoHelper } from '../helpers/mongo-helper'
 import { Collection } from 'mongodb'
 
 let categoryCollection: Collection
+let accountCollection: Collection
 
 const makeSut = (): CategoryMongoRepository => {
   return new CategoryMongoRepository()
@@ -20,6 +21,8 @@ describe('Category Mongo Repository', () => {
   beforeEach(async () => {
     categoryCollection = await MongoHelper.getCollection('categories')
     await categoryCollection.deleteMany({})
+    accountCollection = await MongoHelper.getCollection('accounts')
+    await accountCollection.deleteMany({})
   })
 
   describe('add()', () => {
@@ -31,6 +34,27 @@ describe('Category Mongo Repository', () => {
       })
       const category = await categoryCollection.findOne({ name: 'any_category_name' })
       expect(category).toBeTruthy()
+    })
+  })
+
+  describe('loadByAccountId()', () => {
+    test('Should load survey by id on success', async () => {
+      const res = await accountCollection.insertOne({ nome: 'Leonardo' })
+      await categoryCollection.insertOne({
+        name: 'any_name',
+        accountId: res.ops[0]._id
+      })
+      const sut = makeSut()
+      const category = await sut.loadByAccountId(res.ops[0]._id)
+      expect(category).toBeTruthy()
+      expect(category.length).toBe(1)
+    })
+
+    test('Should load empty list', async () => {
+      const res = await accountCollection.insertOne({ nome: 'Leonardo' })
+      const sut = makeSut()
+      const surveys = await sut.loadByAccountId(res.ops[0]._id)
+      expect(surveys.length).toBe(0)
     })
   })
 })
