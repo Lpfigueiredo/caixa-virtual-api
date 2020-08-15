@@ -2,7 +2,7 @@ import { HttpRequest } from '../../../protocols'
 import { LoadCategoriesByAccountId } from '../../../../domain/usecases/category/load-categories-by-account-id'
 import { LoadCategoryModel } from '../../../../domain/models/load-category'
 import { AddMovementController } from './add-movement-controller'
-import { forbidden, serverError } from '../../../helpers/http/http-helper'
+import { forbidden, serverError, noContent } from '../../../helpers/http/http-helper'
 import { InvalidParamError } from '../../../errors/invalid-param-error'
 import { AddMovement, AddMovementModel } from '../../../../domain/usecases/movement/add-movement/add-movement'
 import MockDate from 'mockdate'
@@ -138,5 +138,11 @@ describe('AddMovement Controller', () => {
     jest.spyOn(addMovementStub, 'add').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
     const httpResponse = await sut.handle(makeFakeRequest())
     expect(httpResponse).toEqual(serverError(new Error()))
+  })
+
+  test('Should return 204 on success', async () => {
+    const { sut } = makeSut('entry')
+    const httpResponse = await sut.handle(makeFakeRequest())
+    expect(httpResponse).toEqual(noContent())
   })
 })
