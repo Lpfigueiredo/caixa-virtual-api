@@ -1,6 +1,5 @@
-import { HttpRequest } from '../../../protocols'
+import { HttpRequest, LoadCategoriesByAccountId } from './load-category-by-account-id-controller-protocols'
 import { CategoryModel } from '../../../../domain/models/category'
-import { LoadCategoriesByAccountId } from '../../../../domain/usecases/category/load-categories-by-account-id'
 import { LoadCategoryController } from './load-category-by-account-id-controller'
 import { ok, noContent, serverError } from '../../../helpers/http/http-helper'
 

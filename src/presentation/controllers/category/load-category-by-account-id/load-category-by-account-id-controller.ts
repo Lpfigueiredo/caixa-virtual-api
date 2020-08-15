@@ -1,5 +1,4 @@
-import { Controller, HttpRequest, HttpResponse } from '../../../protocols'
-import { LoadCategoriesByAccountId } from '../../../../domain/usecases/category/load-categories-by-account-id'
+import { Controller, HttpRequest, HttpResponse, LoadCategoriesByAccountId } from './load-category-by-account-id-controller-protocols'
 import { ok, noContent, serverError } from '../../../helpers/http/http-helper'
 
 export class LoadCategoryController implements Controller {
