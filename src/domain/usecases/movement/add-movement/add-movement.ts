@@ -1,4 +1,4 @@
-export interface SaveMovementModel {
+export interface AddMovementModel {
   accountId: string
   categoryId: string
   type: string
@@ -7,6 +7,6 @@ export interface SaveMovementModel {
   date: Date
 }
 
-export interface SaveMovement {
-  save (data: SaveMovementModel): Promise<void>
+export interface AddMovement {
+  add (data: AddMovementModel): Promise<void>
 }
