@@ -1,28 +1,26 @@
 import { HttpRequest, LoadCategoriesByAccountId } from './load-category-by-account-id-controller-protocols'
-import { CategoryModel } from '../../../../domain/models/category'
 import { LoadCategoryController } from './load-category-by-account-id-controller'
 import { ok, noContent, serverError } from '../../../helpers/http/http-helper'
+import { LoadCategoryModel } from '../../../../domain/models/load-category'
 
 const makeFakeRequest = (): HttpRequest => ({
   accountId: 'any_account_id'
 })
 
-const makeFakeCategoryResult = (): CategoryModel[] => ([
+const makeFakeCategoryResult = (): LoadCategoryModel[] => ([
   {
     id: 'any_id',
-    accountId: 'any_accountId',
     name: 'any_name'
   },
   {
     id: 'any_id',
-    accountId: 'any_accountId',
     name: 'any_name'
   }
 ])
 
 const makeLoadCategoryByAccountId = (): LoadCategoriesByAccountId => {
   class LoadCategoriesByAccountIdStub implements LoadCategoriesByAccountId {
-    async loadById (id: string): Promise<CategoryModel[]> {
+    async loadById (id: string): Promise<LoadCategoryModel[]> {
       return new Promise(resolve => resolve(makeFakeCategoryResult()))
     }
   }
