@@ -1,6 +1,6 @@
 import { Controller, HttpRequest, HttpResponse } from '../../../protocols'
 import { LoadCategoriesByAccountId } from '../../../../domain/usecases/category/load-categories-by-account-id'
-import { forbidden, serverError } from '../../../helpers/http/http-helper'
+import { forbidden, serverError, noContent } from '../../../helpers/http/http-helper'
 import { InvalidParamError } from '../../../errors/invalid-param-error'
 import { AddMovement } from '../../../../domain/usecases/movement/add-movement/add-movement'
 
@@ -37,7 +37,7 @@ export class AddMovementController implements Controller {
         description,
         date: new Date()
       })
-      return null
+      return noContent()
     } catch (error) {
       return serverError(error)
     }
