@@ -7,7 +7,8 @@ import { AddMovement } from '../../../../domain/usecases/movement/add-movement/a
 export class AddMovementController implements Controller {
   constructor (
     private readonly loadByAccountId: LoadCategoriesByAccountId,
-    private readonly addMovement: AddMovement
+    private readonly addMovement: AddMovement,
+    private readonly type: string
   ) {}
 
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
@@ -26,7 +27,7 @@ export class AddMovementController implements Controller {
       await this.addMovement.add({
         accountId,
         categoryId,
-        type: 'entry',
+        type: this.type,
         value: Number(value),
         description,
         date: new Date()

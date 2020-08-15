@@ -51,10 +51,10 @@ interface SutTypes {
   addMovementStub: AddMovement
 }
 
-const makeSut = (): SutTypes => {
+const makeSut = (type: string): SutTypes => {
   const loadCategoriesByAccountIdStub = makeLoadCategoryByAccountId()
   const addMovementStub = makeAddMovement()
-  const sut = new AddMovementController(loadCategoriesByAccountIdStub, addMovementStub)
+  const sut = new AddMovementController(loadCategoriesByAccountIdStub, addMovementStub, type)
   return {
     sut,
     loadCategoriesByAccountIdStub,
@@ -72,28 +72,28 @@ describe('AddMovement Controller', () => {
   })
 
   test('Should call LoadCategoriesByAccountId with correct value', async () => {
-    const { sut, loadCategoriesByAccountIdStub } = makeSut()
+    const { sut, loadCategoriesByAccountIdStub } = makeSut('entry')
     const loadByAccountIdSpy = jest.spyOn(loadCategoriesByAccountIdStub, 'loadById')
     await sut.handle(makeFakeRequest())
     expect(loadByAccountIdSpy).toHaveBeenCalledWith('any_account_id')
   })
 
   test('Should return 403 if LoadCategoriesByAccountId returns empty', async () => {
-    const { sut , loadCategoriesByAccountIdStub } = makeSut()
+    const { sut , loadCategoriesByAccountIdStub } = makeSut('entry')
     jest.spyOn(loadCategoriesByAccountIdStub, 'loadById').mockReturnValueOnce(new Promise((resolve) => resolve([])))
     const httpResponse = await sut.handle(makeFakeRequest())
     expect(httpResponse).toEqual(forbidden(new InvalidParamError('categoryId')))
   })
 
   test('Should return 500 if LoadCategoriesByAccountId throws', async () => {
-    const { sut, loadCategoriesByAccountIdStub } = makeSut()
+    const { sut, loadCategoriesByAccountIdStub } = makeSut('entry')
     jest.spyOn(loadCategoriesByAccountIdStub, 'loadById').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
     const httpResponse = await sut.handle(makeFakeRequest())
     expect(httpResponse).toEqual(serverError(new Error()))
   })
 
   test('Should return 403 if an invalid categoryId is provided', async () => {
-    const { sut } = makeSut()
+    const { sut } = makeSut('entry')
     const httpResponse = await sut.handle({
       accountId: 'any_account_id',
       body: {
@@ -106,7 +106,7 @@ describe('AddMovement Controller', () => {
   })
 
   test('Should call AddMovement with correct values', async () => {
-    const { sut, addMovementStub } = makeSut()
+    const { sut, addMovementStub } = makeSut('entry')
     const addMovementSpy = jest.spyOn(addMovementStub, 'add')
     await sut.handle(makeFakeRequest())
     expect(addMovementSpy).toHaveBeenCalledWith({
