@@ -2,7 +2,7 @@ import { HttpRequest } from '../../../protocols'
 import { CategoryModel } from '../../../../domain/models/category'
 import { LoadCategoriesByAccountId } from '../../../../domain/usecases/category/load-categories-by-account-id'
 import { LoadCategoryController } from './load-category-by-account-id-controller'
-import { ok } from '../../../helpers/http/http-helper'
+import { ok, noContent } from '../../../helpers/http/http-helper'
 
 const makeFakeRequest = (): HttpRequest => ({
   accountId: 'any_account_id'
@@ -56,5 +56,12 @@ describe('LoadCategory Controller', () => {
     const { sut } = makeSut()
     const httpResponse = await sut.handle(makeFakeRequest())
     expect(httpResponse).toEqual(ok(makeFakeCategoryResult()))
+  })
+
+  test('Should return 204 if LoadCategoriesByAccountId returns empty', async () => {
+    const { sut , loadCategoriesByAccountIdStub } = makeSut()
+    jest.spyOn(loadCategoriesByAccountIdStub, 'loadById').mockReturnValueOnce(new Promise((resolve) => resolve([])))
+    const httpResponse = await sut.handle(makeFakeRequest())
+    expect(httpResponse).toEqual(noContent())
   })
 })
