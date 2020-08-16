@@ -9,7 +9,9 @@ import { ObjectId } from 'mongodb'
 export class CategoryMongoRepository implements AddCategoryRepository, LoadCategoryRepository, LoadCategoryByAccountCategoryIdRepository {
   async add (categoryData: AddCategoryModel): Promise<void> {
     const categoryCollection = await MongoHelper.getCollection('categories')
-    await categoryCollection.insertOne(categoryData)
+    const { accountId, ...categoryDataWithoutAccountId } = categoryData
+    const categoryDataFormatted = Object.assign({}, { accountId: new ObjectId(accountId) }, categoryDataWithoutAccountId)
+    await categoryCollection.insertOne(categoryDataFormatted)
   }
 
   async loadByAccountId (id: string): Promise<CategoryModel[]> {

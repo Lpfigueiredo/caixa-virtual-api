@@ -1,6 +1,6 @@
 import { CategoryMongoRepository } from './category-mongo-repository'
 import { MongoHelper } from '../helpers/mongo-helper'
-import { Collection } from 'mongodb'
+import { Collection, ObjectId } from 'mongodb'
 
 let categoryCollection: Collection
 let accountCollection: Collection
@@ -27,9 +27,10 @@ describe('Category Mongo Repository', () => {
 
   describe('add()', () => {
     test('Should add a category on success', async () => {
+      const res = await accountCollection.insertOne({ nome: 'Leonardo' })
       const sut = makeSut()
       await sut.add({
-        accountId: 'any_account_id',
+        accountId: new ObjectId(res.ops[0]._id).toHexString(),
         name: 'any_category_name'
       })
       const category = await categoryCollection.findOne({ name: 'any_category_name' })

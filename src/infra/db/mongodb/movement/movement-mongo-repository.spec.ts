@@ -6,8 +6,8 @@ import { MovementMongoRepository } from './movement-mongo-repository'
 let movementCollection: Collection
 
 const makeFakeMovementData = (): AddMovementModel => ({
-  accountId: 'any_account_id',
-  categoryId: 'any_id',
+  accountId: 'aaaaaaaaaaaaaaaaaaaaaaaa',
+  categoryId: 'bbbbbbbbbbbbbbbbbbbbbbbb',
   type: 'entry',
   value: 12345,
   description: 'any_description',
