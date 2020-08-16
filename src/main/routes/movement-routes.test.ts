@@ -76,4 +76,20 @@ describe('Category Routes', () => {
         .expect(204)
     })
   })
+
+  describe('POST /exits', () => {
+    test('Should return 204 on success', async () => {
+      const { accountId, accessToken } = await makeAccessToken()
+      const categoryId = await makeCategory(accountId)
+      await request(app)
+        .post('/api/exits')
+        .set('x-access-token', accessToken)
+        .send({
+          categoryId,
+          value: '123.45',
+          description: 'any_description'
+        })
+        .expect(204)
+    })
+  })
 })
