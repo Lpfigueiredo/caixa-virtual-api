@@ -64,4 +64,11 @@ describe('DbLoadDailyMovement Usecase', () => {
     await sut.load(makeFakeLoadDailyMovementData())
     expect(loadBySurveyIdSpy).toHaveBeenCalledWith(makeFakeLoadDailyMovementData())
   })
+
+  test('Should throw if LoadDailyMovementRepository throws', async () => {
+    const { sut, loadDailyMovementRepositoryStub } = makeSut()
+    jest.spyOn(loadDailyMovementRepositoryStub, 'load').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
+    const promise = sut.load(makeFakeLoadDailyMovementData())
+    await expect(promise).rejects.toThrow()
+  })
 })
