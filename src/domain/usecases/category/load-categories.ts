@@ -1,4 +1,7 @@
-import { LoadCategoryModel } from '../../models/load-category'
+export interface LoadCategoryModel {
+  id: string
+  name: string
+}
 
 export interface LoadCategories {
   load (): Promise<LoadCategoryModel[]>

@@ -1,7 +1,7 @@
 import { HttpRequest, LoadCategoriesByAccountId } from './load-category-by-account-id-controller-protocols'
 import { LoadCategoryController } from './load-category-by-account-id-controller'
 import { ok, noContent, serverError } from '../../../helpers/http/http-helper'
-import { LoadCategoryModel } from '../../../../domain/models/load-category'
+import { LoadCategoryModel } from '../../../../domain/usecases/category/load-categories'
 
 const makeFakeRequest = (): HttpRequest => ({
   accountId: 'any_account_id'

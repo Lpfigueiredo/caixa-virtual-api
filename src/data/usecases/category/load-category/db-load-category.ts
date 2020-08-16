@@ -1,6 +1,6 @@
 import { LoadCategoriesByAccountId } from '../../../../domain/usecases/category/load-categories-by-account-id'
 import { LoadCategoryRepository } from '../../../protocols/db/category/load-category-repository'
-import { LoadCategoryModel } from '../../../../domain/models/load-category'
+import { LoadCategoryModel } from '../../../../domain/usecases/category/load-categories'
 
 export class DbLoadCategory implements LoadCategoriesByAccountId {
   constructor (private readonly loadCategoryRepository: LoadCategoryRepository) {}
