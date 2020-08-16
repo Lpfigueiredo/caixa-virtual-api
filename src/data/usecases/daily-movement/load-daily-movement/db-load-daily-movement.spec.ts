@@ -60,9 +60,9 @@ describe('DbLoadDailyMovement Usecase', () => {
 
   test('Should call LoadDailyMovementRepository with correct values', async () => {
     const { sut, loadDailyMovementRepositoryStub } = makeSut()
-    const loadBySurveyIdSpy = jest.spyOn(loadDailyMovementRepositoryStub, 'load')
+    const loadSpy = jest.spyOn(loadDailyMovementRepositoryStub, 'load')
     await sut.load(makeFakeLoadDailyMovementData())
-    expect(loadBySurveyIdSpy).toHaveBeenCalledWith(makeFakeLoadDailyMovementData())
+    expect(loadSpy).toHaveBeenCalledWith(makeFakeLoadDailyMovementData())
   })
 
   test('Should throw if LoadDailyMovementRepository throws', async () => {
@@ -70,5 +70,11 @@ describe('DbLoadDailyMovement Usecase', () => {
     jest.spyOn(loadDailyMovementRepositoryStub, 'load').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
     const promise = sut.load(makeFakeLoadDailyMovementData())
     await expect(promise).rejects.toThrow()
+  })
+
+  test('Should return LoadDailyMovementModel on success', async () => {
+    const { sut } = makeSut()
+    const dailyMovement = await sut.load(makeFakeLoadDailyMovementData())
+    expect(dailyMovement).toEqual(makeFakeDailyMovement())
   })
 })
