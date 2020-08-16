@@ -3,7 +3,7 @@ import { DailyMovementModel } from '../../../../domain/models/daily-movement'
 import { LoadDailyMovement, LoadDailyMovementModel } from '../../../../domain/usecases/daily-movement/load-daily-movement'
 import MockDate from 'mockdate'
 import { LoadDailyMovementController } from './load-daily-movement-controller'
-import { serverError } from '../../../helpers/http/http-helper'
+import { serverError, ok } from '../../../helpers/http/http-helper'
 
 const makeFakeRequest = (): HttpRequest => ({
   accountId: 'any_account_id'
@@ -75,5 +75,11 @@ describe('LoadDailyMovement Controller', () => {
     })
     const httpResponse = await sut.handle(makeFakeRequest())
     expect(httpResponse).toEqual(serverError(new Error()))
+  })
+
+  test('Should return 200 on success', async () => {
+    const { sut } = makeSut()
+    const httpResponse = await sut.handle(makeFakeRequest())
+    expect(httpResponse).toEqual(ok(makeFakeDailyMovement()))
   })
 })
