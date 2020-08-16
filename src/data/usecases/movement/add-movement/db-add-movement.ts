@@ -1,5 +1,5 @@
 import { AddMovementRepository } from '../../../protocols/db/movement/add-movement-repository'
-import { AddMovementModel, AddMovement } from '../../../../domain/usecases/movement/add-movement/add-movement'
+import { AddMovementModel, AddMovement } from '../../../../domain/usecases/movement/add-movement'
 import { UpdateAccountRepository } from '../../../protocols/db/account/update-account-repository'
 
 export class DbAddMovement implements AddMovement {

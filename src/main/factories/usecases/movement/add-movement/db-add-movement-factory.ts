@@ -1,4 +1,4 @@
-import { AddMovement } from '../../../../../domain/usecases/movement/add-movement/add-movement'
+import { AddMovement } from '../../../../../domain/usecases/movement/add-movement'
 import { MovementMongoRepository } from '../../../../../infra/db/mongodb/movement/movement-mongo-repository'
 import { DbAddMovement } from '../../../../../data/usecases/movement/add-movement/db-add-movement'
 import { AccountMongoRepository } from '../../../../../infra/db/mongodb/account/account-mongo-repository'

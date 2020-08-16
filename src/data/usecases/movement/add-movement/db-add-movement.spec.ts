@@ -1,4 +1,4 @@
-import { AddMovementModel } from '../../../../domain/usecases/movement/add-movement/add-movement'
+import { AddMovementModel } from '../../../../domain/usecases/movement/add-movement'
 import { AddMovementRepository } from '../../../protocols/db/movement/add-movement-repository'
 import { DbAddMovement } from './db-add-movement'
 import { UpdateAccountRepository } from '../../../protocols/db/account/update-account-repository'

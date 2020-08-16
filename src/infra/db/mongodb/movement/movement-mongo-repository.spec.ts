@@ -1,6 +1,6 @@
 import { MongoHelper } from '../helpers/mongo-helper'
 import { Collection } from 'mongodb'
-import { AddMovementModel } from '../../../../domain/usecases/movement/add-movement/add-movement'
+import { AddMovementModel } from '../../../../domain/usecases/movement/add-movement'
 import { MovementMongoRepository } from './movement-mongo-repository'
 
 let movementCollection: Collection
