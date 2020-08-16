@@ -19,12 +19,8 @@ export class CategoryMongoRepository implements AddCategoryRepository, LoadCateg
   }
 
   async loadByAccountCategoryId (accountId: string, categoryId: string): Promise<CategoryModel> {
-    try {
-      const categoryCollection = await MongoHelper.getCollection('categories')
-      const category = await categoryCollection.findOne({ accountId: new ObjectId(accountId), _id: new ObjectId(categoryId) })
-      return category && MongoHelper.map(category)
-    } catch (error) {
-      return null
-    }
+    const categoryCollection = await MongoHelper.getCollection('categories')
+    const category = await categoryCollection.findOne({ accountId: new ObjectId(accountId), _id: new ObjectId(categoryId) })
+    return category && MongoHelper.map(category)
   }
 }
