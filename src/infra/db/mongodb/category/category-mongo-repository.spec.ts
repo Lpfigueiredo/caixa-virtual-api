@@ -57,4 +57,28 @@ describe('Category Mongo Repository', () => {
       expect(surveys.length).toBe(0)
     })
   })
+
+  describe('loadByAccountCategoryId()', () => {
+    test('Should load survey by id on success', async () => {
+      const resAccount = await accountCollection.insertOne({ nome: 'Leonardo' })
+      const resCategory = await categoryCollection.insertOne({
+        name: 'any_name',
+        accountId: resAccount.ops[0]._id
+      })
+      const sut = makeSut()
+      const category = await sut.loadByAccountCategoryId(resAccount.ops[0]._id, resCategory.ops[0]._id)
+      expect(category).toBeTruthy()
+    })
+
+    test('Should return null if any param is an ObjectId', async () => {
+      const resAccount = await accountCollection.insertOne({ nome: 'Leonardo' })
+      const resCategory = await categoryCollection.insertOne({
+        name: 'any_name',
+        accountId: resAccount.ops[0]._id
+      })
+      const sut = makeSut()
+      const category = await sut.loadByAccountCategoryId('any_account_id', resCategory.ops[0]._id)
+      expect(category).toBeNull()
+    })
+  })
 })

@@ -1,12 +1,12 @@
 import { Controller, HttpRequest, HttpResponse } from '../../../protocols'
-import { LoadCategoriesByAccountId } from '../../../../domain/usecases/category/load-categories-by-account-id'
 import { forbidden, serverError, noContent } from '../../../helpers/http/http-helper'
 import { InvalidParamError } from '../../../errors/invalid-param-error'
 import { AddMovement } from '../../../../domain/usecases/movement/add-movement/add-movement'
+import { LoadCategoriesByAccountCategoryId } from '../../../../domain/usecases/category/load-categories-by-account-category-id'
 
 export class AddMovementController implements Controller {
   constructor (
-    private readonly loadByAccountId: LoadCategoriesByAccountId,
+    private readonly loadByAccountCategoryId: LoadCategoriesByAccountCategoryId,
     private readonly addMovement: AddMovement,
     private readonly type: string
   ) {}
@@ -16,13 +16,8 @@ export class AddMovementController implements Controller {
       const { accountId } = httpRequest
       const { categoryId, description } = httpRequest.body
       let { value } = httpRequest.body
-      const categories = await this.loadByAccountId.loadById(accountId)
-      if (categories.length) {
-        const categoriesObj = categories.map(a => a.id)
-        if (!categoriesObj.includes(categoryId)) {
-          return forbidden(new InvalidParamError('categoryId'))
-        }
-      } else {
+      const category = await this.loadByAccountCategoryId.loadByAccountCategoryId(accountId, categoryId)
+      if (!category) {
         return forbidden(new InvalidParamError('categoryId'))
       }
       value = Number(value) * 100
