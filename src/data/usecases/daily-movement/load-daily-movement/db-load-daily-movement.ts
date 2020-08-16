@@ -6,7 +6,7 @@ export class DbLoadDailyMovement implements LoadDailyMovement {
   constructor (private readonly loadDailyMovementRepository: LoadDailyMovementRepository) {}
 
   async load (data: LoadDailyMovementModel): Promise<DailyMovementModel> {
-    await this.loadDailyMovementRepository.load(data)
-    return null
+    const dailyMovement = await this.loadDailyMovementRepository.load(data)
+    return dailyMovement
   }
 }
