@@ -3,6 +3,7 @@ import { DailyMovementModel } from '../../../../domain/models/daily-movement'
 import { LoadDailyMovement, LoadDailyMovementModel } from '../../../../domain/usecases/daily-movement/load-daily-movement'
 import MockDate from 'mockdate'
 import { LoadDailyMovementController } from './load-daily-movement-controller'
+import { serverError } from '../../../helpers/http/http-helper'
 
 const makeFakeRequest = (): HttpRequest => ({
   accountId: 'any_account_id'
@@ -65,5 +66,14 @@ describe('LoadDailyMovement Controller', () => {
       accountId: 'any_account_id',
       date: new Date()
     })
+  })
+
+  test('Should return 500 if LoadDailyMovement throws', async () => {
+    const { sut, loadDailyMovementStub } = makeSut()
+    jest.spyOn(loadDailyMovementStub, 'load').mockImplementationOnce(async () => {
+      return new Promise((resolve, reject) => reject(new Error()))
+    })
+    const httpResponse = await sut.handle(makeFakeRequest())
+    expect(httpResponse).toEqual(serverError(new Error()))
   })
 })
