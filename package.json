@@ -1,6 +1,6 @@
 {
   "name": "vcaixa.dev",
-  "version": "1.5.2",
+  "version": "1.6.2",
   "description": "Aplicação para o processo seletivo da TecnoSpeed",
   "main": "index.js",
   "scripts": {
