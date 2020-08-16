@@ -13,14 +13,15 @@ services:
     image: node:12
     working_dir: /usr/src/caixa-virtual-api
     restart: always
-    command: bash -c "npm install --only=prod && npm run debug"
+    command: bash -c "npm install && npx tsc -p tsconfig-build.json && npm prune --production && npm start"
     environment:
       - MONGO_URL=mongodb://mongo:27017/caixa-virtual-api
     volumes:
-      - ./dist/:/usr/src/caixa-virtual-api/dist/
+      - ./src/:/usr/src/caixa-virtual-api/src/
       - ./package.json:/usr/src/caixa-virtual-api/package.json
+      - ./tsconfig.json:/usr/src/caixa-virtual-api/tsconfig.json
+      - ./tsconfig-build.json:/usr/src/caixa-virtual-api/tsconfig-build.json
     ports:
       - "5050:5050"
-      - "9222:9222"
     links:
       - mongo
