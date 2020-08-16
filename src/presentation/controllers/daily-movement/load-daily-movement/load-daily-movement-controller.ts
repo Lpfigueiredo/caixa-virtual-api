@@ -10,7 +10,7 @@ export class LoadDailyMovementController implements Controller {
       const { accountId } = httpRequest
       const dailyMovement = await this.loadDailyMovement.load({
         accountId,
-        date: new Date()
+        date: new Date(new Date().setHours(0, 0, 0))
       })
       return ok(dailyMovement)
     } catch (error) {

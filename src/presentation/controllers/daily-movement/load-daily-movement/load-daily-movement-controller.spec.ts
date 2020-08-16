@@ -13,7 +13,7 @@ const makeFakeDailyMovement = (): DailyMovementModel => ({
   totalBalance: 400,
   movements: [
     {
-      date: new Date(),
+      date: new Date(new Date().setHours(0, 0, 0)),
       id: 'any_movement_id',
       category: {
         id: 'any_category_id',
@@ -51,7 +51,7 @@ const makeSut = (): SutTypes => {
 
 describe('LoadDailyMovement Controller', () => {
   beforeAll(() => {
-    MockDate.set(new Date())
+    MockDate.set(new Date().setHours(0, 0, 0))
   })
 
   afterAll(() => {
