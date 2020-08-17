@@ -2,6 +2,8 @@ import { LoadDailyMovementModel } from '../../../../domain/usecases/daily-moveme
 import { DailyMovementModel } from '../../../../domain/models/daily-movement'
 import { LoadDailyMovementRepository } from '../../../protocols/db/daily-movement/load-daily-movement-repository'
 import { DbLoadDailyMovement } from './db-load-daily-movement'
+import { AccountModel } from '../../../../domain/models/account'
+import { LoadAccountByAccountIdRepository } from '../../../protocols/db/account/load-account-by-account-id-repository'
 import MockDate from 'mockdate'
 
 const makeFakeLoadDailyMovementData = (): LoadDailyMovementModel => ({
@@ -26,11 +28,6 @@ const makeFakeDailyMovement = (): DailyMovementModel => ({
   ]
 })
 
-interface SutTypes {
-  sut: DbLoadDailyMovement
-  loadDailyMovementRepositoryStub: LoadDailyMovementRepository
-}
-
 const makeLoadDailyMovementRepository = (): LoadDailyMovementRepository => {
   class LoadDailyMovementRepositoryStub implements LoadDailyMovementRepository {
     async load (data: LoadDailyMovementModel): Promise<DailyMovementModel> {
@@ -40,12 +37,37 @@ const makeLoadDailyMovementRepository = (): LoadDailyMovementRepository => {
   return new LoadDailyMovementRepositoryStub()
 }
 
+const makeFakeAccount = (): AccountModel => ({
+  id: 'valid_id',
+  name: 'valid_name',
+  email: 'valid_email@mail.com',
+  password: 'hashed_password',
+  totalBalance: 0
+})
+
+const makeLoadAccountByAccountIdRepository = (): LoadAccountByAccountIdRepository => {
+  class LoadAccountByAccountIdRepositoryStub implements LoadAccountByAccountIdRepository {
+    async loadByAccountId (accountId: string): Promise<AccountModel> {
+      return new Promise(resolve => resolve(makeFakeAccount()))
+    }
+  }
+  return new LoadAccountByAccountIdRepositoryStub()
+}
+
+interface SutTypes {
+  sut: DbLoadDailyMovement
+  loadDailyMovementRepositoryStub: LoadDailyMovementRepository
+  loadAccountByAccountIdRepositoryStub: LoadAccountByAccountIdRepository
+}
+
 const makeSut = (): SutTypes => {
   const loadDailyMovementRepositoryStub = makeLoadDailyMovementRepository()
-  const sut = new DbLoadDailyMovement(loadDailyMovementRepositoryStub)
+  const loadAccountByAccountIdRepositoryStub = makeLoadAccountByAccountIdRepository()
+  const sut = new DbLoadDailyMovement(loadDailyMovementRepositoryStub, loadAccountByAccountIdRepositoryStub)
   return {
     sut,
-    loadDailyMovementRepositoryStub
+    loadDailyMovementRepositoryStub,
+    loadAccountByAccountIdRepositoryStub
   }
 }
 
@@ -70,6 +92,14 @@ describe('DbLoadDailyMovement Usecase', () => {
     jest.spyOn(loadDailyMovementRepositoryStub, 'load').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
     const promise = sut.load(makeFakeLoadDailyMovementData())
     await expect(promise).rejects.toThrow()
+  })
+
+  test('Should call LoadSurveyByIdRepository if LoadSurveyResultRepository returns null', async () => {
+    const { sut, loadDailyMovementRepositoryStub, loadAccountByAccountIdRepositoryStub } = makeSut()
+    const loadByIdSpy = jest.spyOn(loadAccountByAccountIdRepositoryStub, 'loadByAccountId')
+    jest.spyOn(loadDailyMovementRepositoryStub, 'load').mockReturnValueOnce(new Promise(resolve => resolve(null)))
+    await sut.load(makeFakeLoadDailyMovementData())
+    expect(loadByIdSpy).toHaveBeenCalledWith('any_account_id')
   })
 
   test('Should return LoadDailyMovementModel on success', async () => {
