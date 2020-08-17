@@ -3,7 +3,8 @@ import {
   signUpPath,
   categoriesPath,
   entriesPath,
-  exitsPath
+  exitsPath,
+  dailyMovementPath
 } from './paths/'
 
 export default {
@@ -11,5 +12,6 @@ export default {
   '/login': loginPath,
   '/categories': categoriesPath,
   '/entries/{categoryId}': entriesPath,
-  '/exits/{categoryId}': exitsPath
+  '/exits/{categoryId}': exitsPath,
+  '/daily-movement': dailyMovementPath
 }

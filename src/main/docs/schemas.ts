@@ -6,7 +6,9 @@ import {
   addCategoryParamsSchema,
   categorySchema,
   categoriesSchema,
-  addMovementParamsSchema
+  addMovementParamsSchema,
+  dailyMovementSchema,
+  movementSchema
 } from './schemas/'
 
 export default {
@@ -17,5 +19,7 @@ export default {
   category: categorySchema,
   categories: categoriesSchema,
   addMovementParams: addMovementParamsSchema,
+  dailyMovement: dailyMovementSchema,
+  movement: movementSchema,
   error: errorSchema
 }
