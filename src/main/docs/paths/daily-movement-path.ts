@@ -5,7 +5,7 @@ export const dailyMovementPath = {
     }],
     tags: ['Movimentação'],
     summary: 'API para consultar a movimentação diária do usuário',
-    description: 'Essa rota só pode ser executada por **usuários autenticados**',
+    description: 'Essa rota só pode ser executada por **usuários autenticados**. A data deve estar no formato ISO 8601 (YYYY-MM-DD).',
     parameters: [{
       in: 'query',
       name: 'date',
@@ -23,6 +23,9 @@ export const dailyMovementPath = {
             }
           }
         }
+      },
+      400: {
+        $ref: '#/components/badRequest'
       },
       403: {
         $ref: '#/components/forbidden'
