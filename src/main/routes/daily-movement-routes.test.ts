@@ -48,10 +48,18 @@ describe('LoadDailyMovement Routes', () => {
   })
 
   describe('GET /daily-movement', () => {
-    test('Should return 204 if no matches are found', async () => {
+    test('Should return 200 if no matches are found', async () => {
       const { accessToken } = await makeAccessToken()
       await request(app)
         .get('/api/daily-movement')
+        .set('x-access-token', accessToken)
+        .expect(200)
+    })
+
+    test('Should return 200 if date param is provided and no matches are found', async () => {
+      const { accessToken } = await makeAccessToken()
+      await request(app)
+        .get('/api/daily-movement?date=2020-08-17')
         .set('x-access-token', accessToken)
         .expect(200)
     })
