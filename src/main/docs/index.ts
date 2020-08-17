@@ -23,6 +23,9 @@ export default {
   tags: [{
     name: 'Login',
     description: 'APIs relacionadas a Login'
+  }, {
+    name: 'Categoria',
+    description: 'APIs relacionadas a Categoria'
   }],
   paths,
   schemas,
