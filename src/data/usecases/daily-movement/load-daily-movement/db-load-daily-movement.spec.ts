@@ -28,6 +28,19 @@ const makeFakeDailyMovement = (): DailyMovementModel => ({
   ]
 })
 
+const makeFakeAccount = (): AccountModel => ({
+  id: 'valid_id',
+  name: 'valid_name',
+  email: 'valid_email@mail.com',
+  password: 'hashed_password',
+  totalBalance: 0
+})
+
+const makeFakeEmptyDailyMovement = (): DailyMovementModel => ({
+  totalBalance: 0,
+  movements: []
+})
+
 const makeLoadDailyMovementRepository = (): LoadDailyMovementRepository => {
   class LoadDailyMovementRepositoryStub implements LoadDailyMovementRepository {
     async load (data: LoadDailyMovementModel): Promise<DailyMovementModel> {
@@ -36,14 +49,6 @@ const makeLoadDailyMovementRepository = (): LoadDailyMovementRepository => {
   }
   return new LoadDailyMovementRepositoryStub()
 }
-
-const makeFakeAccount = (): AccountModel => ({
-  id: 'valid_id',
-  name: 'valid_name',
-  email: 'valid_email@mail.com',
-  password: 'hashed_password',
-  totalBalance: 0
-})
 
 const makeLoadAccountByAccountIdRepository = (): LoadAccountByAccountIdRepository => {
   class LoadAccountByAccountIdRepositoryStub implements LoadAccountByAccountIdRepository {
@@ -94,12 +99,19 @@ describe('DbLoadDailyMovement Usecase', () => {
     await expect(promise).rejects.toThrow()
   })
 
-  test('Should call LoadSurveyByIdRepository if LoadSurveyResultRepository returns null', async () => {
+  test('Should call LoadAccountByAccountIdRepositoryStub if LoadDailyMovementRepository returns null', async () => {
     const { sut, loadDailyMovementRepositoryStub, loadAccountByAccountIdRepositoryStub } = makeSut()
-    const loadByIdSpy = jest.spyOn(loadAccountByAccountIdRepositoryStub, 'loadByAccountId')
+    const loadByAccountIdSpy = jest.spyOn(loadAccountByAccountIdRepositoryStub, 'loadByAccountId')
     jest.spyOn(loadDailyMovementRepositoryStub, 'load').mockReturnValueOnce(new Promise(resolve => resolve(null)))
     await sut.load(makeFakeLoadDailyMovementData())
-    expect(loadByIdSpy).toHaveBeenCalledWith('any_account_id')
+    expect(loadByAccountIdSpy).toHaveBeenCalledWith('any_account_id')
+  })
+
+  test('Should return LoadDailyMovementModel with empty movement array if LoadDailyMovementRepository returns null', async () => {
+    const { sut, loadDailyMovementRepositoryStub } = makeSut()
+    jest.spyOn(loadDailyMovementRepositoryStub, 'load').mockReturnValueOnce(new Promise(resolve => resolve(null)))
+    const dailyMovement = await sut.load(makeFakeLoadDailyMovementData())
+    expect(dailyMovement).toEqual(makeFakeEmptyDailyMovement())
   })
 
   test('Should return LoadDailyMovementModel on success', async () => {
