@@ -1,6 +1,6 @@
 import { MongoHelper } from '../helpers/mongo-helper'
 import { AccountMongoRepository } from './account-mongo-repository'
-import { Collection } from 'mongodb'
+import { Collection, ObjectId } from 'mongodb'
 
 let accountCollection: Collection
 
@@ -129,6 +129,28 @@ describe('Account Mongo Repository', () => {
       const account = await accountCollection.findOne({ _id: res._id })
       expect(account).toBeTruthy()
       expect(account.totalBalance).toBe(-12350)
+    })
+  })
+  describe('loadByAccountId()', () => {
+    test('Should return an account on loadByAccountId success', async () => {
+      const sut = makeSut()
+      const res = await accountCollection.insertOne({
+        name: 'any_name',
+        email: 'any_email@mail.com',
+        password: 'any_password'
+      })
+      const account = await sut.loadByAccountId(new ObjectId(res.ops[0]._id).toHexString())
+      expect(account).toBeTruthy()
+      expect(account.id).toBeTruthy()
+      expect(account.name).toBe('any_name')
+      expect(account.email).toBe('any_email@mail.com')
+      expect(account.password).toBe('any_password')
+    })
+
+    test('Should return null if loadByAccountId fails', async () => {
+      const sut = makeSut()
+      const account = await sut.loadByAccountId('aaaaaaaaaaaaaaaaaaaaaaaa')
+      expect(account).toBeFalsy()
     })
   })
 })
