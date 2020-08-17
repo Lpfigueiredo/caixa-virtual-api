@@ -36,6 +36,7 @@
     "@types/mongodb": "^3.5.25",
     "@types/node": "^14.0.27",
     "@types/supertest": "^2.0.10",
+    "@types/swagger-ui-express": "^4.1.2",
     "@typescript-eslint/eslint-plugin": "^3.7.0",
     "coveralls": "^3.1.0",
     "eslint": "^7.5.0",
@@ -60,8 +61,9 @@
     "celebrate": "^12.2.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
+    "mongodb": "^3.6.0",
     "nodemon": "^2.0.4",
-    "mongodb": "^3.6.0"
+    "swagger-ui-express": "^4.1.4"
   },
   "engines": {
     "node": "12.x"
