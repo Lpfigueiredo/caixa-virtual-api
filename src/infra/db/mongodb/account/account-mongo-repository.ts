@@ -10,8 +10,7 @@ import { LoadAccountByAccountIdRepository } from '../../../../data/protocols/db/
 export class AccountMongoRepository implements AddAccountRepository, UpdateAccessTokenRepository, UpdateAccountRepository, LoadAccountByAccountIdRepository {
   async add (accountData: AddAccountModel): Promise<AccountModel> {
     const accountCollection = await MongoHelper.getCollection('accounts')
-    const newAccount = Object.assign({}, accountData, { totalBalance: 0 })
-    const result = await accountCollection.insertOne(newAccount)
+    const result = await accountCollection.insertOne(accountData)
     return MongoHelper.map(result.ops[0])
   }
 

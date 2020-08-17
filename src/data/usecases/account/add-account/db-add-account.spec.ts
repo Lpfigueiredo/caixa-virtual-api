@@ -14,7 +14,8 @@ const makeHasher = (): Hasher => {
 const makeFakeAccountData = (): AddAccountModel => ({
   name: 'valid_name',
   email: 'valid_email@mail.com',
-  password: 'valid_password'
+  password: 'valid_password',
+  totalBalance: 0
 })
 
 const makeAddAccountRepository = (): AddAccountRepository => {
@@ -85,7 +86,8 @@ describe('DbAddAccount Usecase', () => {
     expect(addSpy).toHaveBeenCalledWith({
       name: 'valid_name',
       email: 'valid_email@mail.com',
-      password: 'hashed_password'
+      password: 'hashed_password',
+      totalBalance: 0
     })
   })
 

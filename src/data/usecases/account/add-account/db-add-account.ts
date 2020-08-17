@@ -11,7 +11,7 @@ export class DbAddAccount implements AddAccount {
     const account = await this.loadAccountByEmailRepository.loadByEmail(accountData.email)
     if (!account) {
       const hashedPassword = await this.hasher.hash(accountData.password)
-      const newAccount = await this.addAccountRepository.add(Object.assign({}, accountData, { password: hashedPassword }))
+      const newAccount = await this.addAccountRepository.add(Object.assign({}, accountData, { password: hashedPassword }, { totalBalance: 0 }))
       return newAccount
     }
     return null
