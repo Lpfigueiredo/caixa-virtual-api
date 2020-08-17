@@ -22,6 +22,7 @@ export class MovementMongoRepository implements AddMovementRepository, LoadDaily
   async load (data: LoadDailyMovementModel): Promise<DailyMovementModel> {
     const start = new Date(new Date(data.date).setHours(0, 0, 0, 0))
     const end = new Date(new Date(data.date).setHours(23, 59, 59, 999))
+    const sort: number = -1
     const agg = [
       {
         $match: {
@@ -44,6 +45,10 @@ export class MovementMongoRepository implements AddMovementRepository, LoadDaily
       }, {
         $unwind: {
           path: '$category'
+        }
+      }, {
+        $sort: {
+          date: sort
         }
       }, {
         $group: {
