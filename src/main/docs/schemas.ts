@@ -8,7 +8,9 @@ import {
   categoriesSchema,
   addMovementParamsSchema,
   dailyMovementSchema,
-  movementSchema
+  movementSchema,
+  badRequestSchema,
+  validationSchema
 } from './schemas/'
 
 export default {
@@ -21,5 +23,7 @@ export default {
   addMovementParams: addMovementParamsSchema,
   dailyMovement: dailyMovementSchema,
   movement: movementSchema,
+  badRequest: badRequestSchema,
+  validation: validationSchema,
   error: errorSchema
 }

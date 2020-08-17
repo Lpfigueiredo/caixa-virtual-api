@@ -28,6 +28,9 @@ export const entriesPath = {
       204: {
         description: 'Sucesso, mas sem dados para exibir'
       },
+      400: {
+        $ref: '#/components/badRequest'
+      },
       403: {
         $ref: '#/components/forbidden'
       },
