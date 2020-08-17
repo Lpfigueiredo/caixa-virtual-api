@@ -10,7 +10,7 @@ export class LoadDailyMovementController implements Controller {
       const { accountId } = httpRequest
       const dailyMovement = await this.loadDailyMovement.load({
         accountId,
-        date: new Date(new Date().setHours(0, 0, 0))
+        date: new Date(new Date().valueOf() - new Date().getTimezoneOffset() * 60000)
       })
       return dailyMovement ? ok(dailyMovement) : noContent()
     } catch (error) {

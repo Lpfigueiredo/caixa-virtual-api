@@ -99,7 +99,7 @@ describe('AddMovement Controller', () => {
       type: 'entry',
       value: 12345,
       description: 'any_description',
-      date: new Date()
+      date: new Date(new Date().valueOf() - new Date().getTimezoneOffset() * 60000)
     })
   })
 
@@ -113,7 +113,7 @@ describe('AddMovement Controller', () => {
       type: 'exit',
       value: -12345,
       description: 'any_description',
-      date: new Date()
+      date: new Date(new Date().valueOf() - new Date().getTimezoneOffset() * 60000)
     })
   })
 
