@@ -4,7 +4,7 @@ interface DailyMovementCategoryModel {
 }
 
 interface DailyMovementItemModel {
-  date: Date
+  date: string
   id: string
   category: DailyMovementCategoryModel
   type: string

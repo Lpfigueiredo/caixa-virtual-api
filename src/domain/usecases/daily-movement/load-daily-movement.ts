@@ -2,7 +2,7 @@ import { DailyMovementModel } from '../../models/daily-movement'
 
 export interface LoadDailyMovementModel {
   accountId: string
-  date: Date
+  date: string
 }
 
 export interface LoadDailyMovement {

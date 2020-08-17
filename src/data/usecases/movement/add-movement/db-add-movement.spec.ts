@@ -9,7 +9,7 @@ const makeFakeMovementData = (): AddMovementModel => ({
   type: 'entry',
   value: 12345,
   description: 'any_description',
-  date: new Date()
+  date: new Date().toISOString()
 })
 
 const makeAddMovementRepository = (): AddMovementRepository => {

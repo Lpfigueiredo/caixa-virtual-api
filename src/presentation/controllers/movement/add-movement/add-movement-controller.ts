@@ -31,7 +31,7 @@ export class AddMovementController implements Controller {
         type: this.type,
         value,
         description,
-        date: new Date(new Date().valueOf() - new Date().getTimezoneOffset() * 60000)
+        date: new Date().toISOString()
       })
       return noContent()
     } catch (error) {

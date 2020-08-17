@@ -32,7 +32,7 @@ const makeFakeMovementData = (): AddMovementModel => ({
   type: 'entry',
   value: 12345,
   description: 'any_description',
-  date: new Date()
+  date: new Date().toISOString()
 })
 
 const makeSut = (): MovementMongoRepository => {
@@ -78,19 +78,19 @@ describe('Category Mongo Repository', () => {
         type: 'entry',
         value: 12345,
         description: 'any_description',
-        date: new Date()
+        date: new Date().toISOString()
       }, {
         accountId: new ObjectId(accountId),
         categoryId: new ObjectId(categoryId),
         type: 'exit',
         value: -12340,
         description: 'any_description',
-        date: new Date()
+        date: new Date().toISOString()
       }])
       const sut = makeSut()
       const dailyMovement = await sut.load({
         accountId,
-        date: new Date()
+        date: new Date().toISOString()
       })
       expect(dailyMovement).toBeTruthy()
       expect(dailyMovement.totalBalance).toBeTruthy()

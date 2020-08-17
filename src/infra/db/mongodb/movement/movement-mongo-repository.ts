@@ -20,8 +20,8 @@ export class MovementMongoRepository implements AddMovementRepository, LoadDaily
   }
 
   async load (data: LoadDailyMovementModel): Promise<DailyMovementModel> {
-    const start = new Date(new Date(data.date).setHours(0, 0, 0, 0))
-    const end = new Date(new Date(data.date).setHours(23, 59, 59, 999))
+    const start = new Date(new Date(data.date).setUTCHours(0, 0, 0, 0)).toISOString()
+    const end = new Date(new Date(data.date).setUTCHours(23, 59, 59, 999)).toISOString()
     const sort: number = -1
     const agg = [
       {

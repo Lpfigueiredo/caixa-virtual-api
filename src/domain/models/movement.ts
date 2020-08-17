@@ -5,5 +5,5 @@ export interface MovimentationModel {
   type: string
   value: number
   description: string
-  date: Date
+  date: string
 }

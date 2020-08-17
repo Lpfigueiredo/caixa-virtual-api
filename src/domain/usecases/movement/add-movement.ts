@@ -4,7 +4,7 @@ export interface AddMovementModel {
   type: string
   value: number
   description: string
-  date: Date
+  date: string
 }
 
 export interface AddMovement {

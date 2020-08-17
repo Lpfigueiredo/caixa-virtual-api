@@ -8,14 +8,14 @@ import MockDate from 'mockdate'
 
 const makeFakeLoadDailyMovementData = (): LoadDailyMovementModel => ({
   accountId: 'any_account_id',
-  date: new Date()
+  date: new Date().toISOString()
 })
 
 const makeFakeDailyMovement = (): DailyMovementModel => ({
   totalBalance: 400,
   movements: [
     {
-      date: new Date(),
+      date: new Date().toISOString(),
       id: 'any_movement_id',
       category: {
         id: 'any_category_id',

@@ -21,7 +21,7 @@ const makeFakeDailyMovement = (): DailyMovementModel => ({
   totalBalance: 400,
   movements: [
     {
-      date: new Date(new Date(new Date().valueOf() - new Date().getTimezoneOffset() * 60000)),
+      date: new Date().toISOString(),
       id: 'any_movement_id',
       category: {
         id: 'any_category_id',
@@ -72,7 +72,7 @@ describe('LoadDailyMovement Controller', () => {
     await sut.handle(makeFakeRequest())
     expect(loadSpy).toHaveBeenCalledWith({
       accountId: 'any_account_id',
-      date: new Date(new Date().valueOf() - new Date().getTimezoneOffset() * 60000)
+      date: new Date().toISOString()
     })
   })
 
@@ -82,7 +82,7 @@ describe('LoadDailyMovement Controller', () => {
     await sut.handle(makeFakeRequestWithDate())
     expect(loadSpy).toHaveBeenCalledWith({
       accountId: 'any_account_id',
-      date: new Date('2020-08-17')
+      date: new Date('2020-08-17').toISOString()
     })
   })
 
