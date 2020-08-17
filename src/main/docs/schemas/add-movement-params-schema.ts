@@ -1,4 +1,4 @@
-export const addEntryParamsSchema = {
+export const addMovementParamsSchema = {
   type: 'object',
   properties: {
     value: {

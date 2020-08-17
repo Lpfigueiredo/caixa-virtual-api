@@ -6,7 +6,7 @@ import {
   addCategoryParamsSchema,
   categorySchema,
   categoriesSchema,
-  addEntryParamsSchema
+  addMovementParamsSchema
 } from './schemas/'
 
 export default {
@@ -16,6 +16,6 @@ export default {
   categoryParams: addCategoryParamsSchema,
   category: categorySchema,
   categories: categoriesSchema,
-  addEntryParams: addEntryParamsSchema,
+  addMovementParams: addMovementParamsSchema,
   error: errorSchema
 }

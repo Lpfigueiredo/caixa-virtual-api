@@ -19,7 +19,7 @@ export const entriesPath = {
       content: {
         'application/json': {
           schema: {
-            $ref: '#/schemas/addEntryParams'
+            $ref: '#/schemas/addMovementParams'
           }
         }
       }
