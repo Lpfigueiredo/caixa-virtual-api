@@ -7,13 +7,13 @@ import { serverError, ok } from '../../../helpers/http/http-helper'
 
 const makeFakeRequest = (): HttpRequest => ({
   accountId: 'any_account_id',
-  params: {}
+  query: {}
 })
 
 const makeFakeRequestWithDate = (): HttpRequest => ({
   accountId: 'any_account_id',
-  params: {
-    date: new Date('2020-08-17')
+  query: {
+    date: '2020-08-17'
   }
 })
 

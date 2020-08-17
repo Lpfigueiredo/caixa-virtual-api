@@ -8,7 +8,7 @@ export class LoadDailyMovementController implements Controller {
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
       const { accountId } = httpRequest
-      const { date } = httpRequest.params
+      const { date } = httpRequest.query
       let dateInput = new Date(new Date().valueOf() - new Date().getTimezoneOffset() * 60000)
       if (date) {
         dateInput = new Date(date)
