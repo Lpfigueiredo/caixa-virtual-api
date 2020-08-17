@@ -14,7 +14,7 @@ export class DbLoadDailyMovement implements LoadDailyMovement {
     if (!dailyMovement) {
       const movement = await this.loadAccountByAccountIdRepository.loadByAccountId(data.accountId)
       dailyMovement = {
-        totalBalance: movement.totalBalance,
+        totalBalance: Number(movement.totalBalance) / 100,
         movements: []
       }
     }
