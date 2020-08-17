@@ -5,8 +5,9 @@ import { MongoHelper } from '../helpers/mongo-helper'
 import { UpdateAccessTokenRepository } from '../../../../data/protocols/db/account/update-access-token-repository'
 import { UpdateAccountRepository } from '../../../../data/protocols/db/account/update-account-repository'
 import { ObjectId } from 'mongodb'
+import { LoadAccountByAccountIdRepository } from '../../../../data/protocols/db/account/load-account-by-account-id-repository'
 
-export class AccountMongoRepository implements AddAccountRepository, UpdateAccessTokenRepository, UpdateAccountRepository {
+export class AccountMongoRepository implements AddAccountRepository, UpdateAccessTokenRepository, UpdateAccountRepository, LoadAccountByAccountIdRepository {
   async add (accountData: AddAccountModel): Promise<AccountModel> {
     const accountCollection = await MongoHelper.getCollection('accounts')
     const newAccount = Object.assign({}, accountData, { totalBalance: 0 })
@@ -46,5 +47,11 @@ export class AccountMongoRepository implements AddAccountRepository, UpdateAcces
         totalBalance: value
       }
     })
+  }
+
+  async loadByAccountId (accountId: string): Promise<AccountModel> {
+    const accountCollection = await MongoHelper.getCollection('accounts')
+    const account = await accountCollection.findOne({ _id: new ObjectId(accountId) })
+    return account && MongoHelper.map(account)
   }
 }
