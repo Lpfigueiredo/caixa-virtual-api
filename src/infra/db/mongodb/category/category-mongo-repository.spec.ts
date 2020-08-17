@@ -39,7 +39,7 @@ describe('Category Mongo Repository', () => {
   })
 
   describe('loadByAccountId()', () => {
-    test('Should load survey by id on success', async () => {
+    test('Should load categories by id on success', async () => {
       const res = await accountCollection.insertOne({ nome: 'Leonardo' })
       await categoryCollection.insertOne({
         name: 'any_name',
@@ -60,7 +60,7 @@ describe('Category Mongo Repository', () => {
   })
 
   describe('loadByAccountCategoryId()', () => {
-    test('Should load survey by id on success', async () => {
+    test('Should load category by ids on success', async () => {
       const resAccount = await accountCollection.insertOne({ nome: 'Leonardo' })
       const resCategory = await categoryCollection.insertOne({
         name: 'any_name',
