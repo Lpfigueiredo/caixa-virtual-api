@@ -53,7 +53,7 @@ describe('LoadDailyMovement Routes', () => {
       await request(app)
         .get('/api/daily-movement')
         .set('x-access-token', accessToken)
-        .expect(204)
+        .expect(200)
     })
   })
 })

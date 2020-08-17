@@ -1,6 +1,6 @@
 import { Controller, HttpRequest, HttpResponse } from '../../../protocols'
 import { LoadDailyMovement } from '../../../../domain/usecases/daily-movement/load-daily-movement'
-import { serverError, ok, noContent } from '../../../helpers/http/http-helper'
+import { serverError, ok } from '../../../helpers/http/http-helper'
 
 export class LoadDailyMovementController implements Controller {
   constructor (private readonly loadDailyMovement: LoadDailyMovement) {}
@@ -12,7 +12,7 @@ export class LoadDailyMovementController implements Controller {
         accountId,
         date: new Date(new Date().valueOf() - new Date().getTimezoneOffset() * 60000)
       })
-      return dailyMovement ? ok(dailyMovement) : noContent()
+      return ok(dailyMovement)
     } catch (error) {
       return serverError(error)
     }
