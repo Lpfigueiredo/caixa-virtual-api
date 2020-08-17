@@ -1,7 +1,7 @@
 import request from 'supertest'
 import app from '../config/app'
 import { MongoHelper } from '../../infra/db/mongodb/helpers/mongo-helper'
-import { Collection } from 'mongodb'
+import { Collection, ObjectId } from 'mongodb'
 import { sign } from 'jsonwebtoken'
 import env from '../config/env'
 
@@ -40,7 +40,7 @@ const makeCategory = async (accountId: string): Promise<string> => {
     accountId,
     name: 'Conta de luz'
   })
-  return res.ops[0]._id
+  return new ObjectId(res.ops[0]._id).toHexString()
 }
 
 describe('Category Routes', () => {
