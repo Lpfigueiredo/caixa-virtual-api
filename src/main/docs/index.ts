@@ -26,6 +26,9 @@ export default {
   }, {
     name: 'Categoria',
     description: 'APIs relacionadas a Categoria'
+  }, {
+    name: 'Movimentação',
+    description: 'APIs relacionadas a Movimentação'
   }],
   paths,
   schemas,

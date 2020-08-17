@@ -5,7 +5,8 @@ import {
   signUpParamsSchema,
   addCategoryParamsSchema,
   categorySchema,
-  categoriesSchema
+  categoriesSchema,
+  addEntryParamsSchema
 } from './schemas/'
 
 export default {
@@ -15,5 +16,6 @@ export default {
   categoryParams: addCategoryParamsSchema,
   category: categorySchema,
   categories: categoriesSchema,
+  addEntryParams: addEntryParamsSchema,
   error: errorSchema
 }
