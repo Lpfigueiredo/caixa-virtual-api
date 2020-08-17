@@ -14,7 +14,8 @@ export class AddMovementController implements Controller {
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
       const { accountId } = httpRequest
-      const { categoryId, description } = httpRequest.body
+      const { categoryId } = httpRequest.params
+      const { description } = httpRequest.body
       let { value } = httpRequest.body
       const category = await this.loadByAccountCategoryId.loadByAccountCategoryId(accountId, categoryId)
       if (!category) {

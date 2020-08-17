@@ -66,10 +66,9 @@ describe('Category Routes', () => {
       const { accountId, accessToken } = await makeAccessToken()
       const categoryId = await makeCategory(accountId)
       await request(app)
-        .post('/api/entries')
+        .post(`/api/entries/${categoryId}`)
         .set('x-access-token', accessToken)
         .send({
-          categoryId,
           value: '123.45',
           description: 'any_description'
         })
@@ -82,10 +81,9 @@ describe('Category Routes', () => {
       const { accountId, accessToken } = await makeAccessToken()
       const categoryId = await makeCategory(accountId)
       await request(app)
-        .post('/api/exits')
+        .post(`/api/exits/${categoryId}`)
         .set('x-access-token', accessToken)
         .send({
-          categoryId,
           value: '123.45',
           description: 'any_description'
         })

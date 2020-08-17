@@ -5,6 +5,6 @@ import { makeAddMovementController } from '../factories/controllers/movement/add
 import { addMovementValidation } from '../middlewares/add-movement-validation'
 
 export default (router: Router): void => {
-  router.post('/entries', addMovementValidation, auth, adaptRoute(makeAddMovementController('entry')))
-  router.post('/exits', addMovementValidation, auth, adaptRoute(makeAddMovementController('exit')))
+  router.post('/entries/:categoryId', addMovementValidation, auth, adaptRoute(makeAddMovementController('entry')))
+  router.post('/exits/:categoryId', addMovementValidation, auth, adaptRoute(makeAddMovementController('exit')))
 }

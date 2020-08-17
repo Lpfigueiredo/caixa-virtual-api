@@ -9,8 +9,10 @@ import MockDate from 'mockdate'
 
 const makeFakeRequest = (): HttpRequest => ({
   accountId: 'any_account_id',
+  params: {
+    categoryId: 'any_category_id'
+  },
   body: {
-    categoryId: 'any_category_id',
     value: '123.45',
     description: 'any_description'
   }
