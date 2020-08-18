@@ -8,20 +8,11 @@ services:
       - ./data:/data/db
     ports:
       - "27017:27017"
-  api:
-    container_name: api-container
-    image: node:12
-    working_dir: /usr/src/caixa-virtual-api
+  app:
+    build: .
     restart: always
-    command: bash -c "npm install && npx tsc -p tsconfig-build.json && npm prune --production && npm start"
-    environment:
-      - MONGO_URL=mongodb://mongo:27017/caixa-virtual-api
-    volumes:
-      - ./src/:/usr/src/caixa-virtual-api/src/
-      - ./package.json:/usr/src/caixa-virtual-api/package.json
-      - ./tsconfig.json:/usr/src/caixa-virtual-api/tsconfig.json
-      - ./tsconfig-build.json:/usr/src/caixa-virtual-api/tsconfig-build.json
     ports:
       - "5050:5050"
+    command: npm start
     links:
       - mongo
