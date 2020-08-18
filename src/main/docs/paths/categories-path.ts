@@ -18,7 +18,7 @@ export const categoriesPath = {
     },
     responses: {
       204: {
-        description: 'Sucesso'
+        description: 'Sucesso, mas sem dados para exibir'
       },
       400: {
         $ref: '#/components/badRequest'
