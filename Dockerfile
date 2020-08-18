@@ -6,11 +6,9 @@ ENV MONGO_URL mongodb://mongo:27017/caixa-virtual-api
 
 COPY . .
 
-RUN npm install -D
+RUN npm install
 
-RUN npm install -g typescript
-
-RUN tsc -p tsconfig-build.json
+RUN npx tsc -p tsconfig-build.json
 
 RUN npm prune --production
 
