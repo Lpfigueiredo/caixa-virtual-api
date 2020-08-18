@@ -50,16 +50,18 @@ Aguarde até que apareça a seguinte mensagem:
 Server running at http://localhost:5050
 ```
 
+Mantenha o Terminal aberto
+
 > ## Rotas
 
-A API é composta por 6 rotas. São elas:
+A API é composta por 7 rotas. São elas:
 - `/api/signup`: Responsável por criar um novo usuário
 - `/api/login`: Responsável por fazer o login do usuário
 - `/api/categories`: Responsável por cadastrar ou visualizar as categorias criadas pelo usuário, de acordo com o método HTTP
 - `/api/entries/{categoryId}`: Responsável por adicionar as Entradas monetárias do usuário
 - `/api/exits/{categoryId}`: Responsável por adicionar as Saídas monetárias do usuário
 - `/api/daily-movement`: Responsável por visualizar as movimentações diárias do usuário
-
+- `/docs`: Responsável por visualizar a documentação detalhada com Swagger
 ---
 
 <h4 align="center">Feito de 💜 por: <a href="https://www.linkedin.com/in/leonardo-paulo-figueiredo/">Leonardo Paulo Figueiredo</a></h4>
