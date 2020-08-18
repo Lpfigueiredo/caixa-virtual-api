@@ -14,6 +14,11 @@
 
 1. [Cadastro](./requirements/signup.md)
 2. [Login](./requirements/login.md)
+3. [Criar categoria](./requirements/add-category.md)
+4. [Listar categorias](./requirements/load-categories.md)
+5. [Adicionar entrada](./requirements/add-entries.md)
+6. [Adicionar saída](./requirements/add-exits.md)
+7. [Consultar movimentação diária](./requirements/load-daily-movement.md)
 
 
 
