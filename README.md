@@ -63,6 +63,8 @@ Server running at http://localhost:5050
 
 Mantenha o Terminal aberto.
 
+*Recomendo utilizar o* `docker-compose up -d` *apenas após a primeira execução da API, para poder visualizar os logs da construção do container.*
+
 
 
 > ## Rotas
