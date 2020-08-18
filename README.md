@@ -21,7 +21,7 @@
 * Controle de versão: Git
 * Repositório: GitHub
 * Banco de dados não-relacional: MongoDB
-* Arquitetura: Clean Architecture, API REST
+* Arquitetura: [Clean Architecture](./diagrams), API REST
 * Segurança: CORS, bcrypt
 * Autenticação: JWT
 * Validação: Joi, Celebrate
