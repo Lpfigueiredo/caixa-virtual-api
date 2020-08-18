@@ -62,6 +62,170 @@ A API é composta por 7 rotas. São elas:
 - `/api/exits/{categoryId}`: Responsável por adicionar as Saídas monetárias do usuário
 - `/api/daily-movement`: Responsável por visualizar as movimentações diárias do usuário
 - `/docs`: Responsável por visualizar a documentação detalhada com Swagger
+
+> ## Consumindo a API
+> ### Criando um usuário
+
+Envie uma requisição do tipo `POST` para `http://localhost:5050/api/signup` com os seguintes componentes:
+`BODY`
+```js
+{
+  "name": "string",
+  "email": "string",
+  "password": "string",
+  "passwordConfirmation": "string"
+}
+```
+
+Em caso de sucesso, a resposta será um `statusCode: 200` e retornará:
+```js
+{
+  "accessToken": "string"
+}
+```
+
+> ### Logando usuário
+Envie uma requisição do tipo `POST` para `http://localhost:5050/api/login` com os seguintes componentes:
+`BODY`
+```js
+{
+  "email": "string",
+  "password": "string"
+}
+```
+
+Em caso de sucesso, a resposta será um `statusCode: 200` e retornará:
+```js
+{
+  "accessToken": "string"
+}
+```
+
+> ### Criando categoria
+Envie uma requisição do tipo `POST` para `http://localhost:5050/api/categories` com os seguintes componentes:
+`HEADER`
+```js
+{
+  "x-access-token": "string",
+}
+```
+
+`BODY`
+```js
+{
+  "name": "string"
+}
+```
+
+Em caso de sucesso, a resposta será um `statusCode: 204` e não haverá retorno.
+
+> ### Listando categorias
+Envie uma requisição do tipo `GET` para `http://localhost:5050/api/categories` com os seguintes componentes:
+`HEADER`
+```js
+{
+  "x-access-token": "string",
+}
+```
+
+Em caso de sucesso, a resposta será um `statusCode: 200` e retornará:
+```js
+[
+  {
+    "id": "string",
+    "name": "string"
+  }
+]
+```
+
+> ### Adicionado Entrada monetária
+Envie uma requisição do tipo `POST` para `http://localhost:5050/api/entries/{categoryId}` com os seguintes componentes:
+`HEADER`
+```js
+{
+  "x-access-token": "string",
+}
+```
+
+`PARAM`
+```js
+{
+  "categoryId": "string",
+}
+```
+
+`BODY`
+```js
+{
+  "value": "number",
+  "description": "string"
+}
+```
+
+Em caso de sucesso, a resposta será um `statusCode: 204` e não haverá retorno.
+
+> ### Adicionado Saída monetária
+Envie uma requisição do tipo `POST` para `http://localhost:5050/api/exits/{categoryId}` com os seguintes componentes:
+`HEADER`
+```js
+{
+  "x-access-token": "string",
+}
+```
+
+`PARAM`
+```js
+{
+  "categoryId": "string",
+}
+```
+
+`BODY`
+```js
+{
+  "value": "number",
+  "description": "string"
+}
+```
+
+Em caso de sucesso, a resposta será um `statusCode: 204` e não haverá retorno.
+
+> ### Consultando movimentação diária
+Envie uma requisição do tipo `GET` para `http://localhost:5050/api/daily-movement` com os seguintes componentes:
+`HEADER`
+```js
+{
+  "x-access-token": "string",
+}
+```
+
+`QUERY`: Opcional
+```js
+{
+  "date": "string",
+}
+```
+
+Em caso de sucesso, a resposta será um `statusCode: 200` e retornará:
+```js
+{
+  "totalBalance": "number",
+  "movements": [
+    {
+      "date": "string",
+      "id": "string",
+      "category": {
+        "id": "string",
+        "name": "string"
+      },
+      "type": "string",
+      "value": "number",
+      "description": "string"
+    }
+  ]
+}
+```
+
 ---
 
 <h4 align="center">Feito de 💜 por: <a href="https://www.linkedin.com/in/leonardo-paulo-figueiredo/">Leonardo Paulo Figueiredo</a></h4>
