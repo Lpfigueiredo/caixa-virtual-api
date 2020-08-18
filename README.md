@@ -67,6 +67,7 @@ A API é composta por 7 rotas. São elas:
 > ### Criando um usuário
 
 Envie uma requisição do tipo `POST` para `http://localhost:5050/api/signup` com os seguintes componentes:
+
 `BODY`
 ```js
 {
@@ -86,6 +87,7 @@ Em caso de sucesso, a resposta será um `statusCode: 200` e retornará:
 
 > ### Logando usuário
 Envie uma requisição do tipo `POST` para `http://localhost:5050/api/login` com os seguintes componentes:
+
 `BODY`
 ```js
 {
@@ -103,6 +105,7 @@ Em caso de sucesso, a resposta será um `statusCode: 200` e retornará:
 
 > ### Criando categoria
 Envie uma requisição do tipo `POST` para `http://localhost:5050/api/categories` com os seguintes componentes:
+
 `HEADER`
 ```js
 {
@@ -121,6 +124,7 @@ Em caso de sucesso, a resposta será um `statusCode: 204` e não haverá retorno
 
 > ### Listando categorias
 Envie uma requisição do tipo `GET` para `http://localhost:5050/api/categories` com os seguintes componentes:
+
 `HEADER`
 ```js
 {
@@ -140,6 +144,7 @@ Em caso de sucesso, a resposta será um `statusCode: 200` e retornará:
 
 > ### Adicionado Entrada monetária
 Envie uma requisição do tipo `POST` para `http://localhost:5050/api/entries/{categoryId}` com os seguintes componentes:
+
 `HEADER`
 ```js
 {
@@ -166,6 +171,7 @@ Em caso de sucesso, a resposta será um `statusCode: 204` e não haverá retorno
 
 > ### Adicionado Saída monetária
 Envie uma requisição do tipo `POST` para `http://localhost:5050/api/exits/{categoryId}` com os seguintes componentes:
+
 `HEADER`
 ```js
 {
@@ -192,6 +198,7 @@ Em caso de sucesso, a resposta será um `statusCode: 204` e não haverá retorno
 
 > ### Consultando movimentação diária
 Envie uma requisição do tipo `GET` para `http://localhost:5050/api/daily-movement` com os seguintes componentes:
+
 `HEADER`
 ```js
 {
