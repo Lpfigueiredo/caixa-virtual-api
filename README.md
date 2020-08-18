@@ -50,7 +50,7 @@ Aguarde até que apareça a seguinte mensagem:
 Server running at http://localhost:5050
 ```
 
-Mantenha o Terminal aberto
+Mantenha o Terminal aberto.
 
 > ## Rotas
 
