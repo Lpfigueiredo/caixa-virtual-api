@@ -2,7 +2,7 @@ export const signUpPath = {
   post: {
     tags: ['Login'],
     summary: 'API para criar conta de um usuário',
-    description: 'Essa rota pode ser executada por **qualquer usuário**',
+    description: 'Essa rota pode ser executada por **qualquer usuário**. A senha deve ter, no mínimo, **8 caracteres**.',
     requestBody: {
       required: true,
       content: {
