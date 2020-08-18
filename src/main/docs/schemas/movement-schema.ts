@@ -2,7 +2,7 @@ export const movementSchema = {
   type: 'object',
   properties: {
     date: {
-      type: 'number'
+      type: 'string'
     },
     id: {
       type: 'string'
