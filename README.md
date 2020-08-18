@@ -32,6 +32,24 @@
 * Documentação: Swagger
 * Provedor de serviço de nuvem: AWS, Heroku
 
+> ## Como rodar o projeto
+
+Pré-requisitos:
+- Git
+- Docker
+
+Em seu Terminal, digite os seguintes comandos:
+```bash
+$ git clone https://github.com/Lpfigueiredo/caixa-virtual-api.git
+$ cd caixa-virtual-api
+$ docker-compose up
+```
+
+Aguarde até que apareça a seguinte mensagem:
+```bash
+Server running at http://localhost:5050
+```
+
 ---
 
 <h4 align="center">Feito de 💜 por: <a href="https://www.linkedin.com/in/leonardo-paulo-figueiredo/">Leonardo Paulo Figueiredo</a></h4>
