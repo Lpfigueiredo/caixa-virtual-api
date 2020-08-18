@@ -26,7 +26,7 @@ const makeFakeCategoryResult = (): CategoryModel => (
   }
 )
 
-const makeLoadCategoryByAccSurveyId = (): LoadCategoriesByAccountCategoryId => {
+const makeLoadCategoryByAccountCategoryId = (): LoadCategoriesByAccountCategoryId => {
   class LoadCategoriesByAccountCategoryIdStub implements LoadCategoriesByAccountCategoryId {
     async loadByAccountCategoryId (id: string): Promise<CategoryModel> {
       return new Promise(resolve => resolve(makeFakeCategoryResult()))
@@ -51,7 +51,7 @@ interface SutTypes {
 }
 
 const makeSut = (type: string): SutTypes => {
-  const LoadCategoriesByAccountCategoryIdStub = makeLoadCategoryByAccSurveyId()
+  const LoadCategoriesByAccountCategoryIdStub = makeLoadCategoryByAccountCategoryId()
   const addMovementStub = makeAddMovement()
   const sut = new AddMovementController(LoadCategoriesByAccountCategoryIdStub, addMovementStub, type)
   return {

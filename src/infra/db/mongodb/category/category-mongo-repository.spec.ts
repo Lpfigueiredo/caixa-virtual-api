@@ -54,8 +54,8 @@ describe('Category Mongo Repository', () => {
     test('Should load empty list', async () => {
       const res = await accountCollection.insertOne({ nome: 'Leonardo' })
       const sut = makeSut()
-      const surveys = await sut.loadByAccountId(res.ops[0]._id)
-      expect(surveys.length).toBe(0)
+      const categories = await sut.loadByAccountId(res.ops[0]._id)
+      expect(categories.length).toBe(0)
     })
   })
 

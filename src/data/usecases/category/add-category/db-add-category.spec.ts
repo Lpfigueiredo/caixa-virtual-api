@@ -8,7 +8,7 @@ const makeFakeCategoryData = (): AddCategoryModel => ({
 
 const makeAddCategoryRepository = (): AddCategoryRepository => {
   class AddCategoryRepositoryStub implements AddCategoryRepository {
-    async add (surveyData: AddCategoryModel): Promise<void> {
+    async add (categoryData: AddCategoryModel): Promise<void> {
       return new Promise(resolve => resolve())
     }
   }
@@ -29,16 +29,16 @@ const makeSut = (): SutTypes => {
   }
 }
 
-describe('DbAddSurvey Usecase', () => {
-  test('Should call AddSurveyRepository with correct values', async () => {
+describe('DbAddCategory Usecase', () => {
+  test('Should call AddCategoryRepository with correct values', async () => {
     const { sut, addCategoryRepositoryStub } = makeSut()
     const addSpy = jest.spyOn(addCategoryRepositoryStub, 'add')
-    const surveyData = makeFakeCategoryData()
-    await sut.add(surveyData)
-    expect(addSpy).toHaveBeenCalledWith(surveyData)
+    const categoryData = makeFakeCategoryData()
+    await sut.add(categoryData)
+    expect(addSpy).toHaveBeenCalledWith(categoryData)
   })
 
-  test('Should throw if AddSurveyRepository throws', async () => {
+  test('Should throw if AddCategoryRepository throws', async () => {
     const { sut, addCategoryRepositoryStub } = makeSut()
     jest.spyOn(addCategoryRepositoryStub, 'add').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
     const promise = sut.add(makeFakeCategoryData())

@@ -14,7 +14,7 @@ const makeFakeMovementData = (): AddMovementModel => ({
 
 const makeAddMovementRepository = (): AddMovementRepository => {
   class AddMovementRepositoryStub implements AddMovementRepository {
-    async add (surveyData: AddMovementModel): Promise<void> {
+    async add (categoryData: AddMovementModel): Promise<void> {
       return new Promise(resolve => resolve())
     }
   }
