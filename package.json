@@ -1,8 +1,9 @@
 {
   "name": "vcaixa.dev",
-  "version": "1.8.6",
+  "version": "1.9.6",
   "description": "Aplicação para o processo seletivo da TecnoSpeed",
-  "main": "index.js",
+  "author": "Leonardo Paulo Figueiredo",
+  "license": "ISC",
   "scripts": {
     "start": "node dist/main/server.js",
     "dev": "sucrase-node src/main/server.ts",
@@ -25,8 +26,6 @@
     "node",
     "eslint"
   ],
-  "author": "Leonardo Paulo Figueiredo",
-  "license": "ISC",
   "devDependencies": {
     "@shelf/jest-mongodb": "^1.2.2",
     "@types/bcrypt": "^3.0.0",
