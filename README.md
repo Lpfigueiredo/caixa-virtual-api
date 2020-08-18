@@ -34,7 +34,7 @@
 
 > ## Como rodar o projeto
 
-Pré-requisitos:
+Para rodar o projeto, é necessário que os seguintes recursos estejam instalados e inicializados em sua máquina:
 - Git
 - Docker
 
