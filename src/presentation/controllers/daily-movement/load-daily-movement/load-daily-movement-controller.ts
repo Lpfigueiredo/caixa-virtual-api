@@ -9,7 +9,7 @@ export class LoadDailyMovementController implements Controller {
     try {
       const { accountId } = httpRequest
       const { date } = httpRequest.query
-      let dateInput = new Date(new Date().valueOf() - new Date().getTimezoneOffset() * 60000).toISOString()
+      let dateInput = new Date(new Date().valueOf() - 180 * 60000).toISOString()
       if (date) {
         dateInput = new Date(date).toISOString()
       }

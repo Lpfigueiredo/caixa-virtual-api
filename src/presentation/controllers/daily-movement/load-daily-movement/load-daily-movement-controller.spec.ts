@@ -72,7 +72,7 @@ describe('LoadDailyMovement Controller', () => {
     await sut.handle(makeFakeRequest())
     expect(loadSpy).toHaveBeenCalledWith({
       accountId: 'any_account_id',
-      date: new Date(new Date().valueOf() - new Date().getTimezoneOffset() * 60000).toISOString()
+      date: new Date(new Date().valueOf() - 180 * 60000).toISOString()
     })
   })
 
