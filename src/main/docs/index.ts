@@ -7,7 +7,7 @@ export default {
   info: {
     title: 'Caixa Virtual API',
     description: 'API REST em NodeJs usando Typescript, TDD, Clean Architecture, Design Patterns e princípios SOLID.',
-    version: '1.9.7',
+    version: '1.9.8',
     contact: {
       name: 'Leonardo Figueiredo',
       url: 'https://www.linkedin.com/in/leonardo-paulo-figueiredo/'
