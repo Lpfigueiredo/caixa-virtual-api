@@ -1,1 +1,8 @@
-node_modules
+**
+
+!/src/**
+!/package.json
+!/tsconfig.json
+
+**/*.spec.ts
+**/*.test.ts

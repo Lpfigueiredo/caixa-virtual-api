@@ -8,7 +8,7 @@ COPY . .
 
 RUN npm install
 
-RUN npx tsc -p tsconfig-build.json
+RUN npx tsc
 
 RUN npm prune --production
 
