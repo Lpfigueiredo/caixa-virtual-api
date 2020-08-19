@@ -1,6 +1,6 @@
 import { LoadCategoryRepository } from '../../../protocols/db/category/load-category-repository'
 import { DbLoadCategory } from './db-load-category'
-import { LoadCategoryModel } from '../../../../domain/usecases/category/load-categories'
+import { LoadCategoryModel } from '../../../../domain/usecases/category/load-categories-by-account-id'
 import { CategoryModel } from '../../../../domain/models/category'
 
 const makeFakeCategories = (): CategoryModel[] => ([
