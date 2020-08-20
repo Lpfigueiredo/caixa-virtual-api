@@ -242,6 +242,9 @@ Em caso de sucesso, a resposta será um `statusCode: 200` e retornará:
 }
 ```
 
+*O horário é sincronizado com o horário de Brasília (GMT -3).*
+
+
 ---
 
 <h4 align="center">Feito de 💜 por: <a href="https://www.linkedin.com/in/leonardo-paulo-figueiredo/">Leonardo Paulo Figueiredo</a></h4>
