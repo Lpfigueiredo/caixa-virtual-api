@@ -39,6 +39,7 @@
 * Princípios de design e desenvolvimento: TDD, SOLID, KISS, YAGNI, DRY
 * Conteinerização: Docker
 * Documentação: Swagger
+* Proxy reverso: Nginx
 * Provedor de serviço de nuvem: AWS, Heroku
 
 
