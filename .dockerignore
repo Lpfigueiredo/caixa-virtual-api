@@ -3,6 +3,7 @@
 !/src/**
 !/package.json
 !/tsconfig.json
+!/nginx/**
 
 **/*.spec.ts
 **/*.test.ts
